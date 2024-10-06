@@ -33,6 +33,7 @@
 #   exit 1
 # fi
 
+# try
 cd /software/jsonq.top/server
 git pull origin server
 npm install
