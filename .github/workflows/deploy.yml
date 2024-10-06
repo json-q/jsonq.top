@@ -13,16 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16'
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '16'
 
       - name: Run setup script on remote server via SSH
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
-            ls -a
             cd /software/jsonq.top/server
             bash ./scripts/setup.sh
           host: ${{ secrets.SSH_HOST }}
