@@ -13,31 +13,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v4
+      # - name: ls -a via ssh
+      #   uses: garygrossgarten/github-action-ssh@release
       #   with:
-      #     node-version: '16'
-
-      - name: Copy scripts to remote server via SCP
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: 'scripts/setup.sh'
-          target: '/software/jsonq.top/server/scripts'
-
-      - name: Run setup script on remote server via SSH
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: |
-            cd /software/jsonq.top/server
-            chmod +x ./scripts/setup.sh
-            bash ./scripts/setup.sh
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+      #     command: ls -a
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USER }}
+      #     privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
 
       # - name: Run setup script
       #   run: |
-      #     cd /software/jsonq.top/server && git pull origin server && npm install && bash ./scripts/setup.sh
+      #     bash ./scripts/setup.sh
+      - name: Build and run Go program
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }} # 服务器地址
+          username: ${{ secrets.SSH_USER }} # 登陆用户名
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # 服务器私钥
+          port: 22
+          script: |
+            cd /software/jsonq.top/server &&
+            chmod +x .scripts/deploy.sh &&
+            ./scripts/deploy.sh
+            echo "deploy success"
