@@ -1,21 +1,14 @@
 #!/bin/bash
 
-WORK_DIR="/software/jsonq.top/server"
-if [ ! -d "$WORK_DIR" ]; then
-  echo "Directory $WORK_DIR does not exist. Please check the path."
-  exit 1
-fi
-cd "$WORK_DIR"
-
-if ! command -v git &> /dev/null; then
-  echo "git not found, installing..."
-  if command -v yum &> /dev/null; then
-    sudo yum install -y git
-  else
-    echo "No supported package manager, please install git manually."
-    exit 1
-  fi
-fi
+# if ! command -v git &> /dev/null; then
+#   echo "git not found, installing..."
+#   if command -v yum &> /dev/null; then
+#     sudo yum install -y git
+#   else
+#     echo "No supported package manager, please install git manually."
+#     exit 1
+#   fi
+# fi
 
 # git config --global user.name "JSQ"
 # git config --global user.email "j996730508@163.com"
