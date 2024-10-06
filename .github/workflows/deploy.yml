@@ -51,4 +51,9 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-          ssh $SSH_USER@$SSH_HOST "cd /software/jsonq.top/server&& node -v && bash ./scripts/setup.sh"
+          ssh $SSH_USER@$SSH_HOST  << 'EOF'
+          echo "Initial working directory: $(pwd)"
+          cd /software/jsonq.top/server
+          echo "Changed to directory: $(pwd)"
+          node -v
+          bash ./scripts/setup.sh
