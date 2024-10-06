@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jsonq File OSS</title>
+    <link rel="stylesheet" href="./css/reset.min.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <script src="./lib/polyfill.min.js"></script>
+    <script src="./lib/js.cookie.min.js"></script>
+  </head>
+  <body class="site-page">
+    <nav>
+      <a class="oauth-link" href="/oauth/login/github">
+        <img class="avatar" src="./assets/GitHub.svg" width="30" alt="logo" />
+      </a>
+    </nav>
+    <header>
+      <img width="50" height="35" src="./favicon.ico" />
+      <h1>私有图床</h1>
+    </header>
+    <main>
+      <div id="file-container">
+        <p class="file-icon"><img width="40" src="./assets/Upload.svg" /></p>
+        <p>点击选择图片或者拖拽图片到这里或者截图后粘贴(Ctrl+V)</p>
+        <input type="file" id="file" style="display: none" />
+      </div>
+      <fieldset>
+        <legend>文件链接</legend>
+        <div class="url-wrapper">
+          <div class="url-tag">
+            <label for="URL">
+              <input id="URL" type="radio" name="tagRadio" value="1" checked />
+              URL
+            </label>
+          </div>
+          <div class="url-tag">
+            <label for="HTML">
+              <input id="HTML" type="radio" name="tagRadio" value="2" />
+              HTML
+            </label>
+          </div>
+          <div class="url-tag">
+            <label for="Markdown">
+              <input id="Markdown" type="radio" name="tagRadio" value="3" />
+              Markdown
+            </label>
+          </div>
+        </div>
+        <textarea id="int_urls" class="url-inner-content" placeholder="这里显示图片链接" wrap="off"></textarea>
+      </fieldset>
+    </main>
+  </body>
+
+  <script src="./js/http.js"></script>
+  <script src="./js/fileEvent.js"></script>
+  <script src="./js/index.js"></script>
+  <script>
+    const authReturn = Cookies.get('auth-return');
+    const userInfo = authReturn ? JSON.parse(authReturn) : null;
+
+    if (userInfo.avatar) {
+      document.querySelector('.oauth-link').href = userInfo.profileUrl;
+      document.querySelector('.oauth-link').target = '_blank';
+      document.querySelector('.avatar').src = userInfo.avatar;
+    }
+  </script>
+</html>
