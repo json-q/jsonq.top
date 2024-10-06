@@ -1,0 +1,63 @@
+* {
+  scrollbar-width: thin;
+}
+
+:root {
+  --base-font-size: 14px;
+  /* 段落 > 内边距 */
+  --blockquote-padding: 0.75em;
+  /* 代码内边距 */
+  --code-block-padding: 0.75em;
+  /* 代码/文本 line-height */
+  --base-line-height: 1.5;
+  --sidebar-padding: 15px;
+  --content-max-width: 58em;
+  --sidebar-nav-indent: 0.75em;
+  --link-color: #1890ff;
+  --search-margin: 1em 0 0;
+  --sidebar-name-margin: 1em 0 0;
+  --search-input-margin: 0 -10px;
+  --sidebar-nav-margin: 0;
+}
+
+/* 内容区域默认是居中的，这里让其默认靠左，右边要放 toc 目录 */
+.markdown-section {
+  margin: initial;
+}
+
+/* 封面页 */
+.cover-main > .author-link {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  margin-top: 1em;
+}
+
+.cover-main > .author-link > a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 12px;
+}
+
+.cover-main > .author-link > a > img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* 侧边标题 */
+.app-name > .app-name-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.app-name > .app-name-link > img {
+  width: 50px;
+  height: 35px;
+  margin-right: 8px;
+}
+
+.sidebar-nav li p {
+  margin: 0.3em 0;
+}
