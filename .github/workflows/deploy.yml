@@ -33,6 +33,6 @@ jobs:
           port: 22
           script: |
             cd /software/jsonq.top/server &&
-            chmod +x .scripts/deploy.sh &&
+            chmod +x ./scripts/deploy.sh &&
             ./scripts/deploy.sh
             echo "deploy success"
