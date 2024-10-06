@@ -24,6 +24,16 @@ jobs:
       # - name: Run setup script
       #   run: |
       #     bash ./scripts/setup.sh
+
+      - name: Copy scripts to remote server via SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: 'scripts/setup.sh'
+          target: '/software/jsonq.top/server/scripts'
+
       - name: Build and run Go program
         uses: appleboy/ssh-action@master
         with:
@@ -31,6 +41,7 @@ jobs:
           username: ${{ secrets.SSH_USER }} # 登陆用户名
           key: ${{ secrets.SSH_PRIVATE_KEY }} # 服务器私钥
           script: |
+            echo "Current working directory: $(pwd)"
             cd /software/jsonq.top/server &&
             chmod +x ./scripts/setup.sh &&
             bash ./scripts/setup.sh
