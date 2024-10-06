@@ -32,8 +32,9 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           ssh $SSH_USER@$SSH_HOST  << EOF
-          cd /software/jsonq.top/server
-          git pull origin server
-          npm install
-          npm run build
-          pm2 restart $APP_NAME || pm2 start dist/src/main.js --name $APP_NAME
+            cd /software/jsonq.top/server
+            git pull origin server
+            npm install
+            npm run build
+            pm2 restart $APP_NAME || pm2 start dist/src/main.js --name $APP_NAME
+          EOF
