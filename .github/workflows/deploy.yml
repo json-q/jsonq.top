@@ -33,5 +33,5 @@ jobs:
           script: |
             cd /software/jsonq.top/server &&
             chmod +x ./scripts/setup.sh &&
-            ./scripts/setup.sh
+            bash ./scripts/setup.sh
             echo "deploy success"
