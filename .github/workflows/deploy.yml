@@ -46,6 +46,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
+          APP_NAME: nest-oss
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
@@ -54,4 +55,6 @@ jobs:
           ssh $SSH_USER@$SSH_HOST  << EOF
           cd /software/jsonq.top/server
           git pull origin server
-          bash ./scripts/setup.sh
+          npm install
+          npm run build
+          pm2 restart $APP_NAME || pm2 start dist/src/main.js --name $APP_NAME
