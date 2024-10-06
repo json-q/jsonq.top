@@ -52,8 +52,8 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           ssh $SSH_USER@$SSH_HOST  << 'EOF'
-          echo "Initial working directory: $(pwd)"
           cd /software/jsonq.top/server
-          echo "Changed to directory: $(pwd)"
           node -v
+          npm -v
+          pm2 -v
           bash ./scripts/setup.sh
