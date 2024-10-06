@@ -1,0 +1,26 @@
+name: Deploy-nest
+
+on:
+  push:
+    branches:
+      - server
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: ls -a
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+
+      - name: Run setup script
+        run: |
+          bash ./scripts/setup.sh
