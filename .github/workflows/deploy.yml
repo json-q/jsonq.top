@@ -44,7 +44,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
-          cd /software/jsonq/server &&
+          cd /software/jsonq.top/server &&
           git pull origin server &&
           npm install &&
           bash ./scripts/setup.sh
