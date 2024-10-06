@@ -13,33 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16'
-
-      # - name: ls -a via ssh
-      #   uses: garygrossgarten/github-action-ssh@release
-      #   with:
-      #     command: ls -a
-      #     host: ${{ secrets.SSH_HOST }}
-      #     username: ${{ secrets.SSH_USER }}
-      #     privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
-
-      # - name: Run setup script
-      #   run: |
-      #     bash ./scripts/setup.sh
-
       - name: Build and run Go program
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }} # 服务器地址
           username: ${{ secrets.SSH_USER }} # 登陆用户名
           key: ${{ secrets.SSH_PRIVATE_KEY }} # 服务器私钥
-          # script: |
-          #   cd /software/jsonq.top/server &&
-          #   chmod +x ./scripts/setup.sh &&
-          #   bash ./scripts/setup.sh
 
       - name: Deploy to server
         env:
