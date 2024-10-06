@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /
 cd /software/jsonq.top/server
 
 # check git installed
@@ -24,16 +25,17 @@ git pull origin server
 # node install
 # see: https://github.com/nodesource/distributions?tab=readme-ov-file#no-root-privileges-nodejs-20
 
-npm install --production
+# npm install --production
+npm install --omit=dev
 
 npm run build
 
-# check pm2 installed
-# if ! command -v pm2 &> /dev/null
-# then
-#     echo "pm2 not found, installing..."
-#     npm install -g pm2
-# fi
+check pm2 installed
+if ! command -v pm2 &> /dev/null
+then
+    echo "pm2 not found, installing..."
+    npm install -g pm2
+fi
 
 APP_NAME="nest-oss"
 
