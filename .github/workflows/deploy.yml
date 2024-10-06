@@ -30,9 +30,8 @@ jobs:
           host: ${{ secrets.SSH_HOST }} # 服务器地址
           username: ${{ secrets.SSH_USER }} # 登陆用户名
           key: ${{ secrets.SSH_PRIVATE_KEY }} # 服务器私钥
-          port: 22
           script: |
             cd /software/jsonq.top/server &&
-            chmod +x ./scripts/deploy.sh &&
-            ./scripts/deploy.sh
+            chmod +x ./scripts/setup.sh &&
+            ./scripts/setup.sh
             echo "deploy success"
