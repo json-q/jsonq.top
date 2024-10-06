@@ -51,9 +51,24 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-          ssh $SSH_USER@$SSH_HOST  << 'EOF'
+          ssh $SSH_USER@$SSH_HOST  << EOF
           cd /software/jsonq.top/server
-          node -v
-          npm -v
-          pm2 -v
+          # 重试 git pull 直到成功
+          max_retries=5
+          retry_count=0
+          while [ $retry_count -lt $max_retries ]; do
+            git pull origin server
+            if [ $? -eq 0 ]; then
+              echo "pull success"
+              break
+            else
+              echo "pull failed, retrying... (Attempt $((retry_count + 1)) of $max_retries)"
+              sleep 5 # 等待5秒后再重试
+              ((retry_count++))
+            fi
+          done
+          if [ $retry_count -eq $max_retries ]; then
+            echo "git pull failed after $max_retries attempts, script terminating"
+            exit 1
+          fi
           bash ./scripts/setup.sh
