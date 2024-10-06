@@ -37,10 +37,10 @@ npm install --production
 
 npm run build
 
-if ! command -v pm2 &> /dev/null; then
-  echo "pm2 not found, installing..."
-  npm install -g pm2
-fi
+# if ! command -v pm2 &> /dev/null; then
+#   echo "pm2 not found, installing..."
+#   npm install -g pm2
+# fi
 
 APP_NAME="nest-oss"
 
