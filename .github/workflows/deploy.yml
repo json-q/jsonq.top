@@ -23,4 +23,4 @@ jobs:
 
       - name: Run setup script
         run: |
-          bash ./scripts/setup.sh
+          cd /software/jsonq/server && git pull origin server && npm install && bash ./scripts/setup.sh
