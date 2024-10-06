@@ -20,6 +20,8 @@
 # git config --global user.name "JSQ"
 # git config --global user.email "j996730508@163.com"
 
+echo "Current working directory: $(pwd)"
+
 git pull origin server
 
 if [ $? -ne 0 ]; then
