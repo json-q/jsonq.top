@@ -13,18 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build and run Go program
+      - name: ssh connect server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SSH_HOST }} # 服务器地址
-          username: ${{ secrets.SSH_USER }} # 登陆用户名
-          key: ${{ secrets.SSH_PRIVATE_KEY }} # 服务器私钥
+          host: ${{ secrets.SSH_HOST }} # ip address
+          username: ${{ secrets.SSH_USER }} # server username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # server ssh private key
 
-      - name: Deploy to server
+      - name: Run Script to Deploy serve
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
+          PATH_REMOTE: ${{ secrets.PATH_REMOTE }}
           APP_NAME: nest-oss
         run: |
           mkdir -p ~/.ssh
@@ -32,7 +33,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           ssh $SSH_USER@$SSH_HOST  << EOF
-            cd /software/jsonq.top/server
+            cd $PATH_REMOTE
             git pull origin server
             npm install
             npm run build

@@ -17,15 +17,15 @@ export class InvokeRecordInterceptor implements NestInterceptor {
     const clientIp = getClientIp(request);
 
     this.logger.verbose(
-      `请求信息: ${method}; Path: ${path}; IP: ${clientIp}; userAgent: ${userAgent}; Class: ${context.getClass().name}; Handler: ${context.getHandler().name}`,
+      `Request Message: ${method}; Path: ${path}; IP: ${clientIp}; userAgent: ${userAgent}; Class: ${context.getClass().name}; Handler: ${context.getHandler().name}`,
     );
 
     const now = Date.now();
 
     return next.handle().pipe(
       tap((res) => {
-        this.logger.verbose(`请求用时: ${response.statusCode}: ${Date.now() - now}ms`);
-        this.logger.verbose(`请求结果: ${JSON.stringify(res)}`);
+        this.logger.verbose(`Request Time: ${response.statusCode}: ${Date.now() - now}ms`);
+        this.logger.verbose(`Response Data: ${JSON.stringify(res)}`);
       }),
     );
   }

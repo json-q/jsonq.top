@@ -13,3 +13,6 @@ This is a simple OSS image hosting service based on NestJS.
 - Dual token seamless refresh
 - Quick file upload
 - File type and size limitations
+- Automatic server deployment with Github Actions
+
+> The `.env` is an example, with local development prioritized the `.env.local`.
