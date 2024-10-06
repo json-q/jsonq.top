@@ -1,11 +1,11 @@
 #!/bin/bash
 
-WORK_DIR="/software/jsonq.top/server"
-if [ ! -d "$WORK_DIR" ]; then
-  echo "Directory $WORK_DIR does not exist. Please check the path."
-  exit 1
-fi
-cd "$WORK_DIR"
+# WORK_DIR="/software/jsonq.top/server"
+# if [ ! -d "$WORK_DIR" ]; then
+#   echo "Directory $WORK_DIR does not exist. Please check the path."
+#   exit 1
+# fi
+# cd "$WORK_DIR"
 
 # if ! command -v git &> /dev/null; then
 #   echo "git not found, installing..."
