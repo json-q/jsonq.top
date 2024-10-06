@@ -20,22 +20,20 @@
 # git config --global user.name "JSQ"
 # git config --global user.email "j996730508@163.com"
 
-echo "Current working directory: $(pwd)"
+# git pull origin server
 
-git pull origin server
-
-if [ $? -ne 0 ]; then
-  echo "拉取失败，脚本终止"
-  exit 1
-fi &&
-    echo "pull success"
+# if [ $? -ne 0 ]; then
+#   echo "拉取失败，脚本终止"
+#   exit 1
+# fi &&
+#     echo "pull success"
 
 # if ! command -v node &> /dev/null; then
 #   echo "node not found, please install Node.js manually."
 #   exit 1
 # fi
 
-npm install --production
+# npm install --production
 
 npm run build
 
