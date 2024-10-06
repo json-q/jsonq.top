@@ -33,7 +33,9 @@
 #   exit 1
 # fi
 
-npm install --production
+cd /software/jsonq.top/server
+git pull origin server
+npm install
 
 npm run build
 
