@@ -1,4 +1,4 @@
-name: Deploy-nest
+name: Deploy-Docsify
 
 on:
   push:
@@ -35,7 +35,5 @@ jobs:
           ssh $SSH_USER@$SSH_HOST  << EOF
             cd $BLOG_PATH_REMOTE
             git pull origin doc
-            npm install
-            npm run build
             pm2 restart $APP_NAME || pm2 start "docsify s" --name $APP_NAME
           EOF
