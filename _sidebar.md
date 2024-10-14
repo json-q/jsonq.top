@@ -5,7 +5,6 @@
 - [CSS](/post/css/README.md)
 
   - [CSS 基础](/post/css/base.md)
-  - [常用技巧](/post/css/small-skill.md)
   - [scss 语法](/post/css/scss.md)
 
 - [Vue](post/vue/README.md)
@@ -15,8 +14,6 @@
   - [Vue3 组合式 API](post/vue/vue-composition.md)
   - [路由 状态管理](post/vue/vue-router-vuex.md)
   - [Vue 高级特性及过渡动画](post/vue/vue-advance-animation.md)
-
-- Java
 
 - 部署
   - [Docker](post/deploy/docker.md)
