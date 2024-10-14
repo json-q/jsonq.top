@@ -3,7 +3,7 @@ name: Deploy-nest
 on:
   push:
     branches:
-      - server
+      - doc
 
 jobs:
   deploy:
