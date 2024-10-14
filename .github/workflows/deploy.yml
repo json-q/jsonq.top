@@ -35,7 +35,7 @@ jobs:
           ssh $SSH_USER@$SSH_HOST  << EOF
             cd $SERVER_PATH_REMOTE
 
-            MAX_RETRIES=5
+            MAX_RETRIES=8
             RETRY_COUNT=0
 
             while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
