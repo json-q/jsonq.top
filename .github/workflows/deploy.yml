@@ -39,7 +39,7 @@ jobs:
             RETRY_COUNT=0
 
             while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
-              if git pull origin doc; then
+              if git pull origin server; then
                 break  # pull succesful exit
               else
                 echo "Git pull failed, retrying (\$((RETRY_COUNT + 1)) of \$MAX_RETRIES)..."
