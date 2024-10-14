@@ -27,8 +27,6 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SERVER_PATH_REMOTE: ${{ secrets.SERVER_PATH_REMOTE }}
           APP_NAME: nest-oss
-          MAX_RETRIES: 5
-          RETRY_COUNT: 0
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
@@ -36,6 +34,9 @@ jobs:
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           ssh $SSH_USER@$SSH_HOST  << EOF
             cd $SERVER_PATH_REMOTE
+
+            MAX_RETRIES=5
+            RETRY_COUNT=0
 
             while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
               if git pull origin doc; then
