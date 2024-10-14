@@ -27,8 +27,6 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           BLOG_PATH_REMOTE: ${{ secrets.BLOG_PATH_REMOTE }}
           APP_NAME: docsify-blog
-          MAX_RETRIES: 5
-          RETRY_COUNT: 0
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
@@ -36,6 +34,9 @@ jobs:
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           ssh $SSH_USER@$SSH_HOST  << EOF
           cd $BLOG_PATH_REMOTE
+
+          MAX_RETRIES=5
+          RETRY_COUNT=0
 
           while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
             if git pull origin doc; then
