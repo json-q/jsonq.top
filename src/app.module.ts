@@ -1,4 +1,5 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+// import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { APP_GUARD } from '@nestjs/core';
@@ -9,7 +10,7 @@ import * as winston from 'winston';
 import 'winston-daily-rotate-file';
 import { join } from 'path';
 
-import { IpMiddleware } from './middleware/ip.middleware';
+// import { IpMiddleware } from './middleware/ip.middleware';
 import { AuthModule } from './modules/auth/auth.module';
 import { OssModule } from './modules/oss/oss.module';
 import { AppController } from './app.controller';
@@ -71,8 +72,9 @@ import { AppService } from './app.service';
     },
   ],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(IpMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer.apply(IpMiddleware).forRoutes('*');
+//   }
+// }

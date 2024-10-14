@@ -3,6 +3,9 @@ import { ConfigService } from '@nestjs/config';
 import { Response, Request } from 'express';
 import { getClientIp } from 'request-ip';
 
+/**
+ * @deprecated not use this middleware
+ */
 @Injectable()
 export class IpMiddleware implements NestMiddleware {
   @Inject()

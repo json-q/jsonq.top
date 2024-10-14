@@ -6,7 +6,6 @@ This is a simple OSS image hosting service based on NestJS.
 
 # Features
 
-- IP restriction for requests
 - Request rate limiting
 - Log output and recording
 - Github OAuth2 login
