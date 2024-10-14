@@ -1,6 +1,6 @@
 - HTML
 
-  - [HTML 高级](/post/css/html-advanced.md)
+  - [HTML 基础](/post/css/html-base.md)
 
 - [CSS](/post/css/README.md)
 
