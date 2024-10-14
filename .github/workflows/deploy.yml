@@ -34,6 +34,10 @@ jobs:
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           ssh $SSH_USER@$SSH_HOST  << EOF
           cd $BLOG_PATH_REMOTE
+          # 设置重试次数和计数器
+          MAX_RETRIES=10
+          RETRY_COUNT=0
+
           # 循环尝试拉取代码
           while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
             if git pull origin doc; then
