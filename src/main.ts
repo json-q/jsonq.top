@@ -14,8 +14,8 @@ async function bootstrap() {
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
   app.use(cookiePareser());
 
-  await app.listen(3000, () => {
-    console.log('server running in http://localhost:3000');
+  await app.listen(8888, () => {
+    console.log('server running in http://localhost:8888');
   });
 }
 bootstrap();
