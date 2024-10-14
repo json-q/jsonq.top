@@ -58,7 +58,7 @@
   <script src="./js/index.js"></script>
   <script>
     const authReturn = Cookies.get('auth-return');
-    const userInfo = authReturn ? JSON.parse(authReturn) : null;
+    const userInfo = authReturn ? JSON.parse(authReturn) : {};
 
     if (userInfo.avatar) {
       document.querySelector('.oauth-link').href = userInfo.profileUrl;
