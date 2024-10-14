@@ -27,7 +27,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SERVER_PATH_REMOTE: ${{ secrets.SERVER_PATH_REMOTE }}
           APP_NAME: nest-oss
-          MAX_RETRIESL: 5
+          MAX_RETRIES: 5
           RETRY_COUNT: 0
         run: |
           mkdir -p ~/.ssh
