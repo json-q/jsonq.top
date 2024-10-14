@@ -27,7 +27,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           BLOG_PATH_REMOTE: ${{ secrets.BLOG_PATH_REMOTE }}
           APP_NAME: docsify-blog
-          MAX_RETRIESL: 5
+          MAX_RETRIES: 5
           RETRY_COUNT: 0
         run: |
           mkdir -p ~/.ssh
