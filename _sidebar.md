@@ -1,12 +1,12 @@
-- [HTML CSS](/post/css/README.md)
+- HTML
 
-  - HTML
+  - [HTML 高级](/post/css/html-advanced.md)
 
-    - [HTML 高级](/post/css/html-advanced.md)
+- [CSS](/post/css/README.md)
 
-  - CSS
-    - [CSS 基础](/post/css/base.md)
+  - [CSS 基础](/post/css/base.md)
   - [常用技巧](/post/css/small-skill.md)
+  - [scss 语法](/post/css/scss.md)
 
 - [Vue](post/vue/README.md)
 
@@ -22,3 +22,4 @@
   - [Docker](post/deploy/docker.md)
   - [前后端分离宝塔部署](post/deploy/bt-deploy.md)
   - [Github Action CICD 自动部署](post/deploy/github-action-cicd.md)
+  - [免费无限续期 SSL 证书](post/deploy/ssl-cert.md)

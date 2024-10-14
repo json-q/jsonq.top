@@ -72,8 +72,6 @@
 </dl>
 ```
 
-![image.png](https://pic8.58cdn.com.cn/nowater/webim/big/n_v2798593984aac40188ed8c79ef89534ba.png)
-
 ## table
 
 表格最常见元素:

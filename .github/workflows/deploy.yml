@@ -1,0 +1,41 @@
+name: Deploy-nest
+
+on:
+  push:
+    branches:
+      - server
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: ssh connect server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }} # ip address
+          username: ${{ secrets.SSH_USER }} # server username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # server ssh private key
+
+      - name: Run Script to Deploy serve
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          BLOG_PATH_REMOTE: ${{ secrets.BLOG_PATH_REMOTE }}
+          APP_NAME: docsify-blog
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+          ssh $SSH_USER@$SSH_HOST  << EOF
+            cd $BLOG_PATH_REMOTE
+            git pull origin doc
+            npm install
+            npm run build
+            pm2 restart $APP_NAME || pm2 start "docsify s" --name $APP_NAME
+          EOF

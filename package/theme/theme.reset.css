@@ -11,7 +11,6 @@
   /* 代码/文本 line-height */
   --base-line-height: 1.5;
   --sidebar-padding: 15px;
-  --content-max-width: 58em;
   --sidebar-nav-indent: 0.75em;
   --link-color: #1890ff;
   --search-margin: 1em 0 0;
@@ -23,6 +22,7 @@
 /* 内容区域默认是居中的，这里让其默认靠左，右边要放 toc 目录 */
 .markdown-section {
   margin: initial;
+  max-width: none;
 }
 
 /* 封面页 */
@@ -60,4 +60,23 @@
 
 .sidebar-nav li p {
   margin: 0.3em 0;
+}
+
+/* fix: 侧边栏收缩时右侧 toc 无法正常定位 */
+@media (min-width: 75em) {
+  body.close .sidebar + .content {
+    transform: none;
+  }
+
+  /* 给 toc 留出区域 */
+  .markdown-section {
+    margin-right: 15em;
+  }
+}
+
+@media (max-width: 75em) {
+  .markdown-section {
+    /* 防止 toc 目录遮挡 */
+    margin-right: 1.5em;
+  }
 }

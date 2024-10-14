@@ -140,8 +140,6 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 
 此时通过 `docker ps` 可查看相关的容器启动信息，`docker ps -a` 可查看所有容器包括已停止的。
 
-![image.png](https://pic1.58cdn.com.cn/nowater/webim/big/n_v2eb544584d10642989c1d1b7b9bc0a46a.png)
-
 - 若要启动一个已停止的容器，使用 `docker start <容器id | 容器别名>`。
 - 容器 id 可只写 3 位，只要能和其它容器 id 区分即可。
 - 默认不指定容器名称情况下，会随机生成
@@ -238,5 +236,3 @@ docker run -d -p 80:80 -v /data/nginx/html:/usr/share/nginx/html --name mynginx 
 - 两种方式，在主机挂载/映射的文件，在容器删除时，都依然保留主机上的映射文件。
 
 > 卷名的存储目录若无法记住，可以直接使用 `docker volume inspect <volume_name>` 查看卷的存储位置就可以了
-
-# Docker Compose

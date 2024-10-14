@@ -1,4 +1,4 @@
-使用 Github Action 的原因是，jekins 占用的服务器资源较多，低配置服务器 jekins 很容易把服务器打满。
+使用 Github Action 的原因是，jekins 占用的服务器资源较多，低配置服务器 jekins 很容易资源打满。
 
 # 了解 Github Action
 
@@ -20,6 +20,10 @@
 
 点击项目仓库的 Settings -> Secrets and variables -> Actions -> new repository secret，填入 key 和 value，多个 secret 需要多次创建，在 GitHub Action 中访问时以 object 对象格式访问。跟 js 的对象语法类似。key 就是对象 key，value 就是 对应的值。
 
+![secret key 设置](https://pic.imgdb.cn/item/6703c3d7d29ded1a8c700c82.png)
+
+> 比如 `new repository secret` 时添加了 key `SSH_PRIVATE_KEY`，那么在 GitHub Action 中访问时，就使用 `${{ secrets.SSH_PRIVATE_KEY }}`。
+
 ## 生成 SSH
 
 ssh 公私钥在 `~/.ssh` 下，可以 cd 到该目录下 `ls` 查看。
@@ -31,3 +35,102 @@ ssh 公私钥在 `~/.ssh` 下，可以 cd 到该目录下 `ls` 查看。
 - 生成成功后 `ls` 查看，此时应该有三个文件 `id_rsa`、`id_rsa.pub`、`authorized_keys`
 - `cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`，设置公钥内容为 `authorized_keys` 文件的内容，
 - `cat ~/.ssh/id_rsa` 将私钥内容添加到 GitHub 仓库的 Secret 中。
+
+## 编写 Github Action
+
+此处提供一个 nest 服务的 GitHub Action 示例：
+
+在 项目根目录新建 `.github/workflows/deploy.yml` 文件，内容如下
+
+```yml
+name: Deploy-nest
+
+on:
+  push:
+    branches:
+      - server # 只有提交到 server 分支才会触发部署
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: ssh connect server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }} # ip address
+          username: ${{ secrets.SSH_USER }} # server username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # server ssh private key
+
+      - name: Run Script to Deploy serve
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          PATH_REMOTE: ${{ secrets.PATH_REMOTE }} # 文件存放路径
+          APP_NAME: nest-oss
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+          ssh $SSH_USER@$SSH_HOST  << EOF
+            cd $PATH_REMOTE
+            git pull origin server
+            npm install
+            npm run build
+            pm2 restart $APP_NAME || pm2 start dist/src/main.js --name $APP_NAME
+          EOF
+```
+
+> 最重要的就是 ` Deploy to server` 这个阶段的脚本。简单来说就是连接远程服务器，进入项目目录，执行安装运行脚本，其实就跟正常开发使用命令差不多了。
+
+# 服务器配置
+
+## 安装 git node pm2
+
+由于有 node 服务，所以需要 node 和 pm2 来管理，如果项目为 java 或者其它，也是同理配置好环境即可。
+
+1. 安装 git
+
+- `yum install git`
+- `git config --global user.name "youer username"`
+- `git config --global user.email "your email"`
+- `git --version` 检查 git 是否安装成功
+
+如果无法连接 github，可在 `/etc/hosts` 添加如下代码
+
+```bash
+52.69.186.44 github.com
+151.101.64.133 raw.githubusercontent.com
+```
+
+2. 安装 node
+
+- 下载 node16.x gz 压缩包（Centos7 最高支持到 node16）https://registry.npmmirror.com/binary.html?path=node/latest-v16.x/
+- 上传到服务器解压 `tar -xvf node-v16.x.tar.gz`
+- 配置环境变量：`vi /etc/profile`
+  - 添加 `export PATH=$PATH/xxx/node16.x/bin`
+  - `source /etc/profile` 刷新环境变量
+  - `node -v` 检查 node 是否安装成功
+  - > 其实这里就可以体现出 docker 的好处。直接在服务器安装的话，由于有操作系统版本限制，只能安装某些版本，而用 docker 则无需关心这个问题。
+
+3. 安装 pm2
+
+- `npm install pm2 -g`
+- `pm2 -v` 检查 pm2 是否安装成功
+
+> 这种实现方式是通过拉取仓库代码，运行打包脚本，从而达到部署的，因此，安装时的大量 `node_modules` 也会占用大量的空间存储，如果介意此种方式，且项目的运行不需要依托 node，例如前端项目，就可以仅上传 dist 目录即可。
+
+# 提交代码
+
+此时提交代码就可以触发 GitHub Action 了。失败的话会有邮箱提示，详细信息可以查看 Action 控制台日志。
+
+![cicd 成功示例](https://pic.imgdb.cn/item/6703c3fad29ded1a8c70400b.png)
+
+## SSL 证书
+
+证书相关请查看 [免费无限续期 SSL 证书](/post/deploy/ssl-cert.md)
