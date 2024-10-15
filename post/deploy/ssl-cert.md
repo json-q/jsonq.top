@@ -1,6 +1,8 @@
 # 免费无限续期 SSL 证书
 
-要实现自动续期，至少需要有一台服务器，虚拟空间是不行的。且如果要签泛域名证书的话证书中包含的域名的 DNS 解析不用全部放在同一个地方，比如几个域名用 cloudflare 管理解析记录，另外几个用 DNSpod，这几个域名签进同一张泛域证书里，这样也是可以的。
+要实现自动续期，至少需要有一台服务器，虚拟空间不行。
+
+且如果要签泛域名证书的话，证书中包含的域名的 DNS 解析不用全部放在同一个地方，比如几个域名用 cloudflare 管理解析记录，另外几个用 DNSpod，这几个域名签进同一张泛域证书里，也是可以的。
 
 ## acme.sh
 
@@ -10,9 +12,9 @@
 - [中文说明](https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E)
 - [自动 DNS](https://github.com/acmesh-official/acme.sh/wiki/dnsapi) 只有英文说明
 
-其实某 freessl.cn 里面的那个一元的证书自动化就是用 acme 魔改的，还用的是特别老的 acme，教程也不全，效率很低。
+某 freessl.cn 里面的一元证书自动化就是用 acme 魔改的，用的还是特别老的 acme，教程也不全，效率很低。
 
-下面，我就总结一下怎么用 `acme` 签多域泛域名证书。
+下面就总结一下怎么用 `acme` 签多域泛域名证书。
 
 # 使用 acme.sh
 
@@ -79,7 +81,7 @@ curl https://get.acme.sh | sh
 185.199.108.133               media.githubusercontent.com
 ```
 
-> 这些只能让你能够有访问 github 的能力，但不代表无障碍访问，可能还会遇到访问失败的问题
+> 这些只能让你能够有访问 github 的能力，即 DNS 能够解析成功，但不代表无障碍访问，可能还会遇到访问失败的问题
 
 设置脚本别名，即终端输入 `acme.sh` 执行的就是 `~/.acme.sh/acme.sh`
 
@@ -108,7 +110,7 @@ acme.sh --upgrade --auto-upgrade
 acme 是自动工作的，你签了证书之后，每 60 天就会帮你续期一次，你只要签好就行了。
 
 - 非泛域名多域名证书
-  如果你只是想普通地签多域名证书的话，可以直接用宝塔签，宝塔那个也是内置的 acme 签的证书。也能自己用 acme（得自己装个新的，找到宝塔内置的 acme 在哪也行）。
+  如果只是想普通地签多域名证书的话，可以直接用宝塔签，宝塔也是内置的 acme 签的证书。也能自己用 acme（得自己装个新的，找到宝塔内置的 acme 在哪也行）。
 
 ```bash
 acme.sh --issue -d xxx.com -d www.xxx.com --webroot /home/wwwroot/xxx.com
@@ -132,7 +134,7 @@ acme.sh --issue -d xxx.com,www.xxx.com --webroot /home/wwwroot/xxx.com
 
 ![指引](https://pic.imgdb.cn/item/670bc30ed29ded1a8c1451d0.png)
 
-自己的服务器用 AccessKey 也可以，简单方便，用子账户的话还得授予权限。
+自己的服务器用 AccessKey 也可以，简单方便，用子账户的话还需要手动授予权限（前提是能分辨那些该分配那些不该分配）。
 
 ![阿里云配置 Securty](https://pic.imgdb.cn/item/670bbd9dd29ded1a8c0f9a01.png)
 
@@ -144,7 +146,9 @@ acme.sh --issue -d xxx.com,www.xxx.com --webroot /home/wwwroot/xxx.com
 acme.sh --issue --dns dns_ali -d xxx.com,*.xxx.com --server https://acme-v02.api.letsencrypt.org/directory
 ```
 
-配置正确的话，执行命令后就会自动完成证书签发续期了，生成的证书文件的路径会用绿字输出 ，每六十天会自动续期。注意，新转移到阿里云或新购的域名需要转移后等一天等 DNS 全球生效之后再配置。
+配置正确的话，执行命令后就会自动完成证书签发续期了，生成的证书文件的路径会用绿字输出 ，每六十天会自动续期。
+
+**注意：**新转移到阿里云或新购的域名需要转移后等一天等 DNS 全球生效之后再配置。
 
 ![输出路径](https://pic.imgdb.cn/item/670bd711d29ded1a8c257e51.png)
 
