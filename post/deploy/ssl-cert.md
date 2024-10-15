@@ -30,6 +30,8 @@ apt install socat -y
 curl https://get.acme.sh | sh
 ```
 
+### Github 无法访问
+
 国内主机可能无法访问 GitHub，需要以下步骤
 
 - 打开 DNS 解析网址 https://tool.lu/dns/index.html ，查询有关与 github.com 域名相关的 IP 地址
@@ -76,6 +78,8 @@ curl https://get.acme.sh | sh
 23.100.27.125                 github.dev
 185.199.108.133               media.githubusercontent.com
 ```
+
+> 这些只能让你能够有访问 github 的能力，但不代表无障碍访问，可能还会遇到访问失败的问题
 
 设置脚本别名，即终端输入 `acme.sh` 执行的就是 `~/.acme.sh/acme.sh`
 

@@ -6,8 +6,8 @@
 
 该静态站点部署在 [Vercel](https://vercel.com/) 和云服务器两处，基于 GIthub Action 实现 CI/CD 自动化部署的功能。[图床](https://draw-bed.jsonq.top/client/)为 OSS + Nest 搭建部署的简约后端服务。
 
-- [Vercel 站点](https://jsonq-top.vercel.app)
-- [服务器 站点](https://jsonq.top)
+- [Vercel 地址](https://jsonq-top.vercel.app)
+- [域名 地址](https://jsonq.top)
 
 # 为什么不是 xxx ？
 
