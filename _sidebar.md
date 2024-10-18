@@ -5,7 +5,7 @@
 - [CSS](/post/css/README.md)
 
   - [CSS 基础](/post/css/base.md)
-  - [scss 语法](/post/css/scss.md)
+  - [Sass 语法](/post/css/scss.md)
 
 - [Vue](post/vue/README.md)
 

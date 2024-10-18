@@ -267,3 +267,15 @@ firewall-cmd --zone=public --list-ports  # 查看开放的防火墙端口
 ```
 
 > 为了安全考虑，简易开启防火墙，并开放 80 443 端口，和安全组对应
+
+## 上传证书到阿里云
+
+先找到（搜索） 数字证书管理服务
+
+![上传证书位置](https://pic.imgdb.cn/item/6711dc80d29ded1a8c2e0aaa.png)
+
+根据之前 acme 生成的证书，最简单的方法：使用 Xftp 将 `/root/.acme.sh/xxx.com_cee` 文件夹下载下到本地，然后上传到阿里云
+
+![对应证书名](https://pic.imgdb.cn/item/6711dd30d29ded1a8c2ed53e.png)
+
+> 默认情况下，Xftp 中以 `.` 开头的隐藏文件都不会显示，可以根据上方操作栏的：工具 --> 选项 --> 显示隐藏文件夹（勾选） 即可

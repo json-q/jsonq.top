@@ -1,4 +1,4 @@
-使用 Github Action 的原因是，jekins 占用的服务器资源较多，低配置服务器 jekins 很容易资源打满。
+使用 Github Action 的原因是，jenkins 占用的服务器资源较多，低配置服务器 jenkins 很容易资源打满。
 
 # 了解 Github Action
 
@@ -48,7 +48,7 @@ name: Deploy-nest
 on:
   push:
     branches:
-      - server # 只有提交到 server 分支才会触发部署
+      - server
 
 jobs:
   deploy:
@@ -70,7 +70,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
-          PATH_REMOTE: ${{ secrets.PATH_REMOTE }} # 文件存放路径
+          SERVER_PATH_REMOTE: ${{ secrets.SERVER_PATH_REMOTE }}
           APP_NAME: nest-oss
         run: |
           mkdir -p ~/.ssh
@@ -78,15 +78,33 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           ssh $SSH_USER@$SSH_HOST  << EOF
-            cd $PATH_REMOTE
-            git pull origin server
+            cd $SERVER_PATH_REMOTE
+
+            MAX_RETRIES=8
+            RETRY_COUNT=0
+
+            while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
+              if git pull origin server; then
+                break  # pull succesful exit
+              else
+                echo "Git pull failed, retrying (\$((RETRY_COUNT + 1)) of \$MAX_RETRIES)..."
+                ((RETRY_COUNT++))
+                sleep 5
+              fi
+            done
+
+            # check if retry count exceeded
+            if [ \$RETRY_COUNT -eq \$MAX_RETRIES ]; then
+              echo "Failed to pull code after \$MAX_RETRIES attempts. Exiting."
+              exit 1  # throw error
+            fi
             npm install
             npm run build
             pm2 restart $APP_NAME || pm2 start dist/src/main.js --name $APP_NAME
           EOF
 ```
 
-> 最重要的就是 ` Deploy to server` 这个阶段的脚本。简单来说就是连接远程服务器，进入项目目录，执行安装运行脚本，其实就跟正常开发使用命令差不多了。
+> 最重要的就是 ` Deploy to server` 这个阶段的脚本。简单来说就是连接远程服务器，进入项目目录，执行安装运行脚本，其实就跟正常开发使用命令差不多了，值得注意的是 `git pull` 阶段增加了错误重试机制，因为国内服务器直接拉取 GitHub 代码失败率较高。
 
 # 服务器配置
 
