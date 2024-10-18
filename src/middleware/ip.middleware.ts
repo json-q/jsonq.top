@@ -1,5 +1,4 @@
-import { HttpException, HttpStatus, Inject, Injectable, NestMiddleware } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { HttpException, HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { getClientIp } from 'request-ip';
 
@@ -8,12 +7,9 @@ import { getClientIp } from 'request-ip';
  */
 @Injectable()
 export class IpMiddleware implements NestMiddleware {
-  @Inject()
-  private readonly configService: ConfigService;
-
   use(req: Request, res: Response, next: () => void) {
     // 允许的IP列表
-    const allowedIps: string[] = ['::1', this.configService.get('ServerIP')];
+    const allowedIps: string[] = ['::1'];
     const clientIp = getClientIp(req);
     const exist = allowedIps.some((ip) => clientIp.indexOf(ip) > -1);
 

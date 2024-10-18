@@ -52,7 +52,6 @@ document.addEventListener('paste', function (e) {
     // Only handle image file
     if (items[i].type.indexOf('image') !== -1) {
       const file = items[i].getAsFile();
-      console.log('Pasted file:', file);
       onFileChange(file);
     }
   }

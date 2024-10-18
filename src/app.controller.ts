@@ -1,15 +1,14 @@
-import { Controller, Get, Inject, UseGuards } from '@nestjs/common';
+import { Controller, Get, Inject, Req, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { AppService } from './app.service';
-import { RequestGuard } from './guard/request.guard';
 
 @Controller()
-@UseGuards(RequestGuard)
 export class AppController {
   @Inject()
   private readonly appService: AppService;
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHello(@Req() req, @Res() res: Response) {
+    this.appService.getHello(req, res);
   }
 }

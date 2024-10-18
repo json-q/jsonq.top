@@ -21,6 +21,8 @@ export class AuthService {
 
   @Inject(JwtService)
   private readonly jwtService: JwtService;
+  @Inject()
+  private readonly configService: ConfigService;
 
   githubCallback(@Req() req, @Res() res: Response) {
     if (!req.user) {
@@ -48,8 +50,6 @@ export class AuthService {
     res.cookie(refreshKey, refreshToken, { ...cookieOptions, maxAge: COOKIE_REFRESH_EXPIRE });
     res.redirect('/client');
   }
-  @Inject()
-  private readonly configService: ConfigService;
 
   async refreshAccessToken(@Req() req: Request, @Res() res: Response) {
     const userKey = this.configService.get('CookieUserKey');

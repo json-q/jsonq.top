@@ -12,6 +12,7 @@ This is a simple OSS image hosting service based on NestJS.
 - Dual token seamless refresh
 - Quick file upload
 - File type and size limitations
+- Ability to recognize image URLs and upload them to OSS (works even faster with `auto-transfer-imgurl` project)
 - Automatic server deployment with Github Actions
 
-> The `.env` is an example, with local development prioritized the `.env.local`.
+> The `.env` is an example, with local development prioritized the `.env.local`. On the server, you must manually upload the `.env.local` file.

@@ -25,8 +25,6 @@ const http = ({ url = '', method = 'get', params = {}, data = {}, formData, succ
         if (xhr.status >= 200 && xhr.status < 300) {
           const res = xhr.responseText;
           const pareseRes = pareseJson(res);
-          console.log(pareseRes);
-
           if (success) {
             success(pareseRes);
           }

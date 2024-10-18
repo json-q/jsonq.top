@@ -8,7 +8,7 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
     super({
       clientID: 'Ov23liR1iXGKQrXPS1JE',
       clientSecret: '89271672aa73e82bf08a2d67afc7c6def86d82dd',
-      callbackURL: 'http://localhost:3000/oauth/github/redirect',
+      callbackURL: 'http://localhost:8888/oauth/github/redirect',
       scope: ['public_profile'],
     });
   }

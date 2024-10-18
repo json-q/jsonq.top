@@ -42,7 +42,7 @@ import { AppService } from './app.service';
     ThrottlerModule.forRoot([
       {
         ttl: 1000,
-        limit: 3,
+        limit: 1000,
       },
     ]),
     WinstonModule.forRootAsync({

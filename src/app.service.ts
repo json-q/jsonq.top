@@ -1,11 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Injectable, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 
 @Injectable()
 export class AppService {
-  @Inject()
-  private readonly configService: ConfigService;
-  getHello(): string {
-    return 'Hello World!-----' + JSON.stringify(this.configService.get('AccessKeyID'));
+  getHello(@Req() req: Request, @Res() res: Response) {
+    res.send('<h1>This server is running</h1>');
   }
 }

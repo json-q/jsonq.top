@@ -7,23 +7,30 @@ import {
   Logger,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { Request } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { CONTROL_AUTH } from '@/decorator/constants';
 
 @Injectable()
 export class RequestGuard implements CanActivate {
   private readonly logger = new Logger(RequestGuard.name);
 
+  @Inject(Reflector)
+  private reflector: Reflector;
   @Inject(JwtService)
   private jwtService: JwtService;
-
   @Inject()
   private readonly configService: ConfigService;
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     const request: Request = context.switchToHttp().getRequest();
+
+    // skip auth verify
+    const metadata = this.reflector.get(CONTROL_AUTH, context.getHandler());
+    if (metadata == 'public') return true;
 
     const authKey = this.configService.get('CookieAccessKey');
     const configGithubId = this.configService.get('GithubID');
