@@ -84,7 +84,7 @@
 
 详情请参照 MDN 文档 [table 弃用的属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/table#%E5%BC%83%E7%94%A8%E7%9A%84%E5%B1%9E%E6%80%A7)
 
-![table基本使用](https://pic.imgdb.cn/item/64a26c921ddac507cca68a11.jpg)
+![table基本使用](https://static.jsonq.top/2024/10/18/160803663_0cd664db-6457-4ef4-839a-491285f36fd4.jpg)
 
 `border-collapse: collapse;` 来决定 border 的边框是合并的
 

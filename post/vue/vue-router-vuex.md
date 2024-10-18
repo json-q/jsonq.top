@@ -9,11 +9,11 @@ npm i vue-router
 ## 路由基本使用
 
 1. **创建路由实例**  
-   ![创建路由实例](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032332804.jpeg)
+   ![创建路由实例](https://static.jsonq.top/2024/10/18/161017019_c8521b9f-7d4a-4300-9c03-d7c7befce353.jpeg)
 2. **在 `main.js` 中使用 路由实例**  
-   ![使用 路由实例](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032333994.jpeg)
+   ![使用路由实例](https://static.jsonq.top/2024/10/18/161018543_5341c90c-34eb-49e8-98c2-cefcda1c191a.jpeg)
 3. **使用 `<router-link>` 设置跳转链接。使用 `<router-view>` 设置路由组件的渲染位置**  
-   ![router组件渲染](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032333437.jpeg)
+   ![router组件渲染](https://static.jsonq.top/2024/10/18/161019985_32fdd49b-d387-44ce-ac78-dc99a26df207.jpeg)
 
 > redirect 在 router 实例中的作用就是 **路由重定向**，访问 path 路径时，重定向到 redirect 对应的 path 路径
 
@@ -42,7 +42,7 @@ const Home = () => import(/* webpackChunkName: 'home' */ "@/views/Home.vue");
 类似 `xxx/:xx` ，以 `/:` 做匹配的路由都是动态路由
 
 1. **使用动态路由**  
-   ![动态路由](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032333750.jpeg)
+   ![动态路由](https://static.jsonq.top/2024/10/18/161021342_de6caead-0e53-4011-afb7-da9d533b17c6.jpeg)
 2. **获取动态路由的值**
 
 3. template 模板中获取，通过 `$route.params` 获取参数对象
@@ -268,7 +268,7 @@ router.beforEach((to, form) => {
 });
 ```
 
-![参数打印](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032333307.jpeg)
+![参数打印](https://static.jsonq.top/2024/10/18/161022851_923e62f9-6d3f-4ced-b2ae-5e6f32cb50f0.jpeg)
 
 beforEach 回调有返回值：
 
@@ -286,7 +286,7 @@ beforEach 回调有返回值：
 
 Vuex 的数据流程图：
 
-![Vuex数据流程图](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032334605.png)
+![Vuex数据流程图](https://static.jsonq.top/2024/10/18/161024219_00b17c11-df19-4d6e-b59e-ca1fa4ce8035.png)
 
 ## Vuex 基本使用
 
@@ -478,7 +478,7 @@ mapState 不仅可以接收一个数组，也可以接收一个对象。
 </script>
 ```
 
-![mapState映射](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032334444.jpeg)
+![mapState映射](https://static.jsonq.top/2024/10/18/161025601_47ae7613-2648-45d7-b597-d8c41c316833.jpeg)
 
 ## setup 中使用 mapState
 
@@ -498,10 +498,10 @@ mapState 不仅可以接收一个数组，也可以接收一个对象。
 
 会出现如下错误：
 
-![computed直接使用mapState解构](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032334483.jpeg)
+![computed直接使用mapState解构](https://static.jsonq.top/2024/10/18/161027755_8db0d62e-4e61-4ca9-aa6b-630c19a1f5b2.jpeg)
 
 原因是，`name、age` 函数是通过 `this.$store.state` 进行访问数据，而 **setup 中没有 this**
-![name函数](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032334807.jpeg)
+![name函数](https://static.jsonq.top/2024/10/18/161029744_b78f9f8d-03f4-4efd-849d-7c43c3acf174.jpeg)
 
 若无法通过 this 访问，则可以给函数手动**绑定 this**，让函数有`this.$store`。
 
@@ -520,7 +520,7 @@ useState 可以通过实例 `store.state` 的所有数据，和 `this.$store.sta
 ```
 
 访问成功
-![bind绑定this](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032334135.jpeg)
+![bind绑定this](https://static.jsonq.top/2024/10/18/161031189_b9101396-49c8-411d-8997-5dc9bf39237c.jpeg)
 
 ### setup 中 mapState hooks 封装
 
@@ -839,7 +839,7 @@ app.use(pinia);
 
 defineStore 接收两个参数，`defineStore(id: string, options:{...})`，id 必须为唯一值
 
-![pinia基本使用](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032334449.jpeg)
+![pinia基本使用](https://static.jsonq.top/2024/10/18/161032366_2545c50f-f51f-4046-bb50-54ddf33887fa.jpeg)
 
 **注意：Store 获取到后不能被解构，那么会失去响应式**
 
@@ -901,7 +901,7 @@ function btnClick() {
    };
    ```
    **`$state`问题说明**：虽然官方说是替换 state，但实际结果却并非如此
-   ![$state问题说明](https://cdn.jsdelivr.net/gh/json-q/picture-bed@main/2023/08/202308032335899.jpeg)
+   ![$state问题说明](https://static.jsonq.top/2024/10/18/161033222_272e9e3e-d5dc-4004-bc43-4ce58046c002.jpeg)
 
 ## getters
 

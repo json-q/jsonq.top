@@ -25,7 +25,7 @@
 
 3. **_浏览器渲染流程_**
    自上而下依次解析，解析到外部链接时
-   ![浏览器渲染流程](https://pic1.imgdb.cn/item/64672c92e03e90d87438fe91.jpg)
+   ![浏览器渲染流程](https://static.jsonq.top/2024/10/18/160745123_563638d9-3b8e-4bd4-9fee-b3b650e6cbbb.jpg)
 
 # CSS 基本属性
 
@@ -308,7 +308,7 @@
 
 HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属性
 
-![盒子](https://pic.imgdb.cn/item/6478391af024cca1731eed37.jpg)
+![盒子](https://static.jsonq.top/2024/10/18/160747429_cc668f6f-35a8-4e9e-b6fa-abbeaad9cf43.jpg)
 
 ## 基础属性
 
@@ -367,7 +367,7 @@ padding 的缩写的顺序为：`top right bottom left`
 
 ### 上下 margin 的传递
 
-![margin-top](https://pic.imgdb.cn/item/64784c01f024cca173385797.jpg)
+![margin-top](https://static.jsonq.top/2024/10/18/160752600_0be919e2-1294-4b89-b66c-694f803528bb.jpg)
 
 - margin-top 传递
   - 如果**块级元素的顶部线和父元素的顶部线重叠**，那么这个**块级元素的 margin-top 值会传递给父元素**
@@ -382,7 +382,7 @@ padding 的缩写的顺序为：`top right bottom left`
 
 ## 上下 margin 的折叠
 
-![margin 的重叠问题](https://pic.imgdb.cn/item/64784d2cf024cca1733a52a4.jpg)
+![margin 的重叠问题](https://static.jsonq.top/2024/10/18/160756184_c99be2d4-6100-46ea-9aaf-3f71aa11794a.jpg)
 
 - **垂直方向上相邻** 2 个 margin（margin-top、margin-bottom）有**可能会合并为 1 个 margin**，这种现象叫做 collapse（折叠）
 - 水平方向上的 margin（margin-left、margin-right）永远不会 collapse
@@ -396,7 +396,7 @@ padding 的缩写的顺序为：`top right bottom left`
 - 两个兄弟块级元素之间上下 margin 的折叠
   - 见上图
 - 父子块级元素之间 margin 的折叠
-  - ![父子块级元素之间 margin 的折叠](https://pic.imgdb.cn/item/64785894f024cca17346d0f4.jpg)
+  - ![父子块级元素之间 margin 的折叠](https://static.jsonq.top/2024/10/18/160800758_502bda88-a9bf-4601-8411-7b8da5a20fba.jpg)
 
 ## 常用属性
 

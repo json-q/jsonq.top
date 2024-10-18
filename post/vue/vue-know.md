@@ -23,13 +23,13 @@
   ```
 
   具体安装流程图如下：
-  ![选择安装方式](https://pic.imgdb.cn/item/64197471a682492fcc4e4837.jpg)
-  ![自定义安装选项](https://pic.imgdb.cn/item/64197617a682492fcc50fa86.jpg)
-  ![选择Vue版本](https://pic.imgdb.cn/item/64197667a682492fcc51825f.jpg)
-  ![选择ESLint规范](https://pic.imgdb.cn/item/641979c3a682492fcc5799d0.jpg)
-  ![代码检测时机](https://pic.imgdb.cn/item/64197a59a682492fcc58c8d9.jpg)
-  ![配置文件保存位置](https://pic.imgdb.cn/item/64197b12a682492fcc5a5590.jpg)
-  ![保存此次配置](https://pic.imgdb.cn/item/64197b7ca682492fcc5b43d6.jpg)
+  ![选择安装方式](https://static.jsonq.top/2024/10/18/161002168_89da9e7b-db6f-41e4-9cde-2c5b00e5e0fe.jpg)
+  ![自定义安装选项](https://static.jsonq.top/2024/10/18/161002587_fe1270d1-efbe-4ff8-9504-320272f3d2a8.jpg)
+  ![选择Vue版本](https://static.jsonq.top/2024/10/18/161002885_2b07ddc3-7e23-4a1f-876c-b44561f27240.jpg)
+  ![选择ESLint规范](https://static.jsonq.top/2024/10/18/161003235_7c472c1e-c674-455d-8ba5-a890faa92a75.jpg)
+  ![代码检测时机](https://static.jsonq.top/2024/10/18/161003551_96402036-f438-446f-99e1-49e6d6116dc7.jpg)
+  ![配置文件保存位置](https://static.jsonq.top/2024/10/18/161003892_dc757309-51fe-4ea8-b00e-c39862c0ab2a.jpg)
+  ![保存此次配置](https://static.jsonq.top/2024/10/18/161004619_085a708f-8f57-49da-80a9-59b02bd1f2f6.jpg)
 
   > 该配置是自定义创建项目，即**第三个选项**，若选择前两个，则直接创建默认项目配置。
 
@@ -38,7 +38,7 @@
 - data 返回的对象是有添加到 Vue 的响应式系统中；
   - 当 data 中的数据发生改变时，对应的内容也会发生更新。
   - Mustache 中不仅仅可以是 data 中的属性，也可以是一个 JavaScript 的表达式
-    ![模板语法使用](https://pic.imgdb.cn/item/6411c78bebf10e5d53bbc62a.jpg)
+    ![模板语法使用](https://static.jsonq.top/2024/10/18/161004831_d4ef91c8-3cf6-4c07-be34-1c9c4448a63f.jpg)
 
 # data 属性
 
@@ -56,7 +56,7 @@
   - 在该方法中，我们可以**使用 this 关键字**来直接访问到 data 中返回的对象的属性；
 - 官方文档有这么一段描述：
 
-![原因](https://pic.imgdb.cn/item/6411ce9debf10e5d53cd3d14.jpg)
+![原因](https://static.jsonq.top/2024/10/18/161005038_124f3a69-5108-42ff-88cd-f886ca99bc98.jpg)
 
 简单使用：
 
@@ -99,7 +99,7 @@
   - 二个参数： `"(value, key) in object"`
   - 三个参数： `"(value, key, index) in object"`
 
-![列表渲染](https://pic.imgdb.cn/item/6411cbbbebf10e5d53c76899.jpg)
+![列表渲染](https://static.jsonq.top/2024/10/18/161005263_3825a73a-8aeb-473d-9b64-eaa55fea6e3e.jpg)
 
 > 当我们需要遍历渲染的是**内容区域时**，可以使用`template`元素，例如：`<template v-for="item in arr">...</template>`
 
@@ -186,7 +186,7 @@
   </script>
   ```
 
-  ![结果](https://pic.imgdb.cn/item/64128829ebf10e5d53044898.jpg)
+  ![结果](https://static.jsonq.top/2024/10/18/161009789_314f4022-1499-496c-b83b-244fbb8fd37c.jpg)
 
   - **数组语法**
 
@@ -224,7 +224,7 @@
   </script>
   ```
 
-  ![结果](https://pic.imgdb.cn/item/641596dea682492fcc925b60.jpg)
+  ![结果](https://static.jsonq.top/2024/10/18/161010034_1c14a984-4bbb-41ee-92f3-87c7952715d0.jpg)
 
 ### 绑定动态 style
 
@@ -260,7 +260,7 @@
   </script>
   ```
 
-  ![结果](https://pic.imgdb.cn/item/64159abca682492fcc9a32b7.jpg)
+  ![结果](https://static.jsonq.top/2024/10/18/161010245_df02eba3-8df9-42dd-bbf7-5485aac5158c.jpg)
 
 - 数组语法：
   ```html
@@ -304,7 +304,7 @@
        },
   </script>
   ```
-  ![结果](https://pic.imgdb.cn/item/6415a009a682492fcca2daa6.jpg)
+  ![结果](https://static.jsonq.top/2024/10/18/161010456_d0607842-7032-4b86-ac06-9b420a8fe455.jpg)
 
 ### 绑定动态对象属性
 
@@ -327,7 +327,7 @@
 </script>
 ```
 
-![结果](https://pic.imgdb.cn/item/6415a117a682492fcca4bff8.jpg)
+![结果](https://static.jsonq.top/2024/10/18/161010657_648be04b-c508-49ae-b08e-e172e69eab4e.jpg)
 
 ## v-on 事件绑定（重要）
 
@@ -477,7 +477,7 @@ Vue 提供了下面的指令来进行条件判断：`v-if、 v-else、 v-else-if
 
 如图所示：
 
-![结果](https://pic.imgdb.cn/item/64171ed9a682492fcc4881b5.jpg)
+![结果](https://static.jsonq.top/2024/10/18/161010863_3b207747-fce7-4e7c-a96b-3e9b75e04264.jpg)
 
 ### template 元素
 
@@ -511,7 +511,7 @@ Vue 提供了下面的指令来进行条件判断：`v-if、 v-else、 v-else-if
 </script>
 ```
 
-![结果](https://pic.imgdb.cn/item/6416a275a682492fcc66e20a.jpg)
+![结果](https://static.jsonq.top/2024/10/18/161011086_027743ab-9c86-4583-9017-2f22f9b2472d.jpg)
 
 ### v-show
 
@@ -559,7 +559,7 @@ Vue 提供了下面的指令来进行条件判断：`v-if、 v-else、 v-else-if
 </script>
 ```
 
-![结果](https://pic.imgdb.cn/item/6416e1b9a682492fccd7ad19.jpg)
+![结果](https://static.jsonq.top/2024/10/18/161011311_b0df3be9-7ae5-427e-af79-847d3f89cf26.jpg)
 
 ### v-model 的原理
 
@@ -612,7 +612,7 @@ Vue 提供了下面的指令来进行条件判断：`v-if、 v-else、 v-else-if
        },
    </script>
    ```
-   ![结果](https://pic.imgdb.cn/item/64171878a682492fcc3b62c6.jpg)
+   ![结果](https://static.jsonq.top/2024/10/18/161011544_2d0b6567-dc21-4815-8e50-9b9db063c6e1.jpg)
 3. radio
    ```html
    <div id="app">
@@ -671,21 +671,21 @@ Vue 提供了下面的指令来进行条件判断：`v-if、 v-else、 v-else-if
 </script>
 ```
 
-![v-html](https://pic.imgdb.cn/item/6411d3c1ebf10e5d53d798a1.jpg)
+![v-html](https://static.jsonq.top/2024/10/18/161011917_d728b72a-6b2e-4dd2-a47d-1bf7500aad46.jpg)
 
 ## v-pre
 
 v-pre 用于**跳过元素和它的子元素的编译过程**，显示原始的 Mustache 标签
 跳过不需要编译的节点，加快编译的速度
 
-![v-pre](https://pic.imgdb.cn/item/6411d4c4ebf10e5d53d97038.jpg)
+![v-pre](https://static.jsonq.top/2024/10/18/161012146_f34b2b9f-efb8-4212-ade2-eb74cb6fdf26.jpg)
 
 ## v-cloak
 
 **这个指令保持在元素上直到关联组件实例结束编译**
 和 CSS 规则如`[v-cloak] { display: none }`一起用时，这个指令可以隐藏未编译的 Mustache 标签直到组件实例准备完毕
 
-![v-cloak](https://pic.imgdb.cn/item/6411d57febf10e5d53daebd7.jpg)
+![v-cloak](https://static.jsonq.top/2024/10/18/161012362_01b18810-c45d-4a31-bbf9-cdd4e8ea3549.jpg)
 
 > 页面在渲染时，当编译时间过长，未解析到模板语法的时候，页面实际显示的是`{{info}}`，编译完成时，才会替换为属性值。为了防止这种现象，可以使用`v-cloak`
 
@@ -895,7 +895,7 @@ Vue 将被侦听的数组的变更方法进行了包裹，所以它们也将会�
 </script>
 ```
 
-![结果](https://pic.imgdb.cn/item/6416c84ba682492fccac4d19.jpg)
+![结果](https://static.jsonq.top/2024/10/18/161012582_22154c26-3643-4a04-8092-d53a3d38b27b.jpg)
 
 由图可得：
 渲染同样个数多个标签，`methods`调用了 3 次，而`computed`只调用了 1 次，区别就在于**计算属性的缓存**。
@@ -906,7 +906,7 @@ Vue 将被侦听的数组的变更方法进行了包裹，所以它们也将会�
 2. 在**数据不发生变化**时，计算属性是**不需要重新计算**的
 3. 但是如果**依赖的数据发生变化**，在使用时，计算属性依然**会重新进行计算**
 
-![对比](https://pic.imgdb.cn/item/6416c9e2a682492fccb010fe.jpg)
+![对比](https://static.jsonq.top/2024/10/18/161012802_b82d5855-1337-4f35-b93c-cb57d796cccf.jpg)
 
 ### 计算属性的 setter 和 getter
 
@@ -976,7 +976,7 @@ computed: {
 </script>
 ```
 
-![结果](https://pic.imgdb.cn/item/6416cf4da682492fccb8ed19.jpg)
+![结果](https://static.jsonq.top/2024/10/18/161013020_84867e78-77d6-40e4-ac4d-c90efd5b551b.jpg)
 
 > `watch`内部的监听的函数会接收到两个值，第一个是监听的值的**最新值**，第二个是监听的值的**上一次的值**
 

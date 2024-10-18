@@ -6,7 +6,7 @@
 
 ## 局部自定义指令
 
-![局部自定义指令](https://pic2.imgdb.cn/item/6449f0020d2dde577735d0f4.jpg)
+![局部自定义指令](https://static.jsonq.top/2024/10/18/160930235_f8f1e46a-6562-40fe-8d82-a99f415f942e.jpg)
 
 > 在 选项式 API 中， v-xxx 的 xxx 对应的是 directives 中的 key
 >
@@ -27,7 +27,7 @@ app.directive("focus", {
 
 当自定义指令过多时，会导致 main.js 中的挂载非常多，为了更易于，可以将其抽离出去
 
-![自定义指令抽离](https://pic2.imgdb.cn/item/644a01020d2dde57774aa9da.jpg)
+![自定义指令抽离](https://static.jsonq.top/2024/10/18/160932474_9d230fa2-002b-4e89-bddc-55369ba0852a.jpg)
 
 ## 自定义指令生命周期
 
@@ -43,7 +43,7 @@ app.directive("focus", {
 
 ## 指令的参数和修饰符
 
-![指令的参数和修饰符](https://pic2.imgdb.cn/item/644a06ea0d2dde5777520344.jpg)
+![指令的参数和修饰符](https://static.jsonq.top/2024/10/18/160947094_d9716bb5-bbb8-404c-bea9-d5b587ce3de1.jpg)
 
 # Teleport
 
@@ -63,9 +63,6 @@ Teleport 是一个 Vue 提供的内置组件，类似于 react 的 `Portals`
 - 两个属性：
   - to：指定将其中的内容移动到的目标元素，可以使用选择器
   - disabled：是否禁用 teleport 的功能
-
-代码实现：
-![teleport使用](https://pic2.imgdb.cn/item/644a06ea0d2dde5777520344.jpg)
 
 > 当在 `<teleport>` 标签上使用 disabled 时，`<teleport>` 的功能就会失效，相当于 `<templete>`
 >
@@ -226,7 +223,7 @@ class 的 name 命名规则如下：
 
 整个动画流程状态如图所示：
 
-![动画状态](https://pic2.imgdb.cn/item/644a44650d2dde5777aaa4da.jpg)
+![动画状态](https://static.jsonq.top/2024/10/18/160947830_977ae6c2-0d3b-473c-ae29-625c7980084b.jpg)
 
 **appear：初次渲染**
 给 `<transition/>` 属性添加 apper 属性，可以实现首次渲染时的动画效果
@@ -468,11 +465,11 @@ obj.name = "李四";
 
 在 [监听属性变化](#监听属性变化) 这一步，实现的流程大致如下：
 
-![监听属性变化流程思路](https://pic2.imgdb.cn/item/644cf86f0d2dde5777a2bea6.jpg)
+![监听属性变化流程思路](https://static.jsonq.top/2024/10/18/160948212_0b6136c6-2c3a-4565-bb2f-0b6576528ed7.jpg)
 
 通过 Map 对象进行多重 map 映射，就可以很轻松的获取到数对象的 属性 对应的 dep 对象
 
-![map映射](https://pic2.imgdb.cn/item/644cfbe80d2dde5777a64c5f.jpg)
+![map映射](https://static.jsonq.top/2024/10/18/160948542_d8462418-e337-4864-ac6c-4da511231022.jpg)
 
 ```js
 class Depend {
@@ -568,7 +565,7 @@ console.log("age发生变化------");
 user.age = 30;
 ```
 
-![执行结果](https://pic2.imgdb.cn/item/644d06350d2dde5777b185aa.jpg)
+![执行结果](https://static.jsonq.top/2024/10/18/160949156_873b2df5-9e01-4a6a-96d6-a833cc74c324.jpg)
 
 1. 每一个对象的每一个属性都会对应一个 dep 对象
 2. 同一个对象的多个属性的 dep 对象是存放在一个 map 对象中的
@@ -579,7 +576,7 @@ user.age = 30;
 
 当一个函数内部，重复使用一个属性时，函数会被执行多次
 
-![BUG](https://pic2.imgdb.cn/item/644d09280d2dde5777b4c4ad.jpg)
+![BUG](https://static.jsonq.top/2024/10/18/160949438_3a30f971-b84c-478d-8b1f-4c3451bc434f.jpg)
 
 每次获取时，都会执行 get 内部的逻辑
 
