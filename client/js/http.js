@@ -25,22 +25,30 @@ const http = ({ url = '', method = 'get', params = {}, data = {}, formData, succ
         if (xhr.status >= 200 && xhr.status < 300) {
           const res = xhr.responseText;
           const pareseRes = pareseJson(res);
-          if (success) {
-            success(pareseRes);
+          if (pareseRes.code != 0) {
+            if (error) {
+              error(xhr.status);
+            }
+            reject(xhr.status);
+          } else {
+            if (success) {
+              success(pareseRes);
+            }
+            resolve(pareseRes);
           }
-          resolve(pareseRes);
         } else if (xhr.status === 401 && url != '/oauth/refresh') {
           http({
             url: '/oauth/refresh',
             method: 'POST',
             success() {
-              http({ url, method, params, data, formData }).then(resolve).reject(reject);
+              http({ url, method, params, data, formData })?.then(resolve)?.reject(reject);
             },
             error() {
-              console.log('login expired, need login');
+              alert('login expired, need login');
             },
           });
         } else {
+          alert('request failed');
           if (error) {
             error(xhr.status);
           }

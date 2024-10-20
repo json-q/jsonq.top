@@ -30,4 +30,8 @@ export default () => ({
     clientSecret: process.env.ClientSecret,
     callbackURL: process.env.CallbackURL,
   },
+  jwt: {
+    secret: process.env.JwtSecret,
+    expiresIn: process.env.JwtExpire,
+  },
 });

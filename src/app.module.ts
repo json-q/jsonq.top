@@ -21,9 +21,7 @@ import envConfig from './config/env';
   imports: [
     AuthModule,
     OssModule,
-    // local config don't commit to git
     ConfigModule.forRoot({
-      // envFilePath: ['.env.local', '.env'],
       load: [envConfig],
       isGlobal: true,
     }),
@@ -37,12 +35,16 @@ import envConfig from './config/env';
         serveRoot: '/favicon.ico',
       },
     ),
-    JwtModule.register({
+    JwtModule.registerAsync({
       global: true,
-      signOptions: {
-        expiresIn: '30m',
-      },
-      secret: '7accdc82bd754d6da1888c73b9801b9e',
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        signOptions: {
+          expiresIn: configService.get('jwt.expiresIn'),
+        },
+        secret: configService.get('jwt.secret'),
+      }),
     }),
     // ThrottlerModule.forRoot([
     //   {

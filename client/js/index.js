@@ -19,13 +19,17 @@ function uploadFile(file) {
     url: '/oss/upload',
     method: 'POST',
     formData,
-  }).then((res) => {
-    if (res.code != 0) {
-      return;
-    }
-    completeFile.push(res.data);
-    genTextAreaValue();
-  });
+  })
+    .then((res) => {
+      if (res.code != 0) {
+        return;
+      }
+      completeFile.push(res.data);
+      genTextAreaValue();
+    })
+    .catch((err) => {
+      alert(err.errMsg);
+    });
 }
 
 function genTextAreaValue() {
