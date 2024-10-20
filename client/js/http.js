@@ -34,7 +34,7 @@ const http = ({ url = '', method = 'get', params = {}, data = {}, formData, succ
             url: '/oauth/refresh',
             method: 'POST',
             success() {
-              http({ url, method, params, data, formData });
+              http({ url, method, params, data, formData }).then(resolve).reject(reject);
             },
             error() {
               console.log('login expired, need login');
