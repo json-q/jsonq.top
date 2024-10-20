@@ -40,9 +40,9 @@ export class AuthService {
     const accessToken = this.jwtService.sign(userInfo, { expiresIn: JWT_ACCESS_EXPIRE });
     const refreshToken = this.jwtService.sign(userInfo, { expiresIn: JWT_REFRESH_EXPIRE });
 
-    const userKey = this.configService.get('CookieUserKey');
-    const accessKey = this.configService.get('CookieAccessKey');
-    const refreshKey = this.configService.get('CookieRefreshKey');
+    const userKey = this.configService.get('cookie.userKey');
+    const accessKey = this.configService.get('cookie.accessKey');
+    const refreshKey = this.configService.get('cookie.refreshKey');
 
     // No sensitive information , can be set for a long time
     res.cookie(userKey, JSON.stringify(userInfo), { maxAge: COOKIE_REFRESH_EXPIRE });
@@ -52,9 +52,9 @@ export class AuthService {
   }
 
   async refreshAccessToken(@Req() req: Request, @Res() res: Response) {
-    const userKey = this.configService.get('CookieUserKey');
-    const accessKey = this.configService.get('CookieAccessKey');
-    const refreshKey = this.configService.get('CookieRefreshKey');
+    const userKey = this.configService.get('cookie.userKey');
+    const accessKey = this.configService.get('cookie.accessKey');
+    const refreshKey = this.configService.get('cookie.refreshKey');
     const refreshToken = req.cookies[refreshKey];
 
     if (!refreshToken) throw new UnauthorizedException('Null Refresh Authorized');

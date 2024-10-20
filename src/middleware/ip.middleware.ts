@@ -8,7 +8,6 @@ import { getClientIp } from 'request-ip';
 @Injectable()
 export class IpMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: () => void) {
-    // 允许的IP列表
     const allowedIps: string[] = ['::1'];
     const clientIp = getClientIp(req);
     const exist = allowedIps.some((ip) => clientIp.indexOf(ip) > -1);

@@ -55,5 +55,5 @@ jobs:
             fi
             npm install
             npm run build
-            pm2 restart $APP_NAME || pm2 start dist/src/main.js --name $APP_NAME
+            pm2 restart $APP_NAME || pm2 start ecosystem.config.js --env production --name $APP_NAME
           EOF

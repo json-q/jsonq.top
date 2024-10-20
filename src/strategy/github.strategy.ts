@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-github2';
 
 @Injectable()
 export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
-  constructor() {
+  constructor(configService: ConfigService) {
     super({
-      clientID: 'Ov23liR1iXGKQrXPS1JE',
-      clientSecret: '89271672aa73e82bf08a2d67afc7c6def86d82dd',
-      callbackURL: 'https://draw-bed.jsonq.top/oauth/github/redirect',
+      clientID: configService.get('github.clientID'),
+      clientSecret: configService.get('github.clientSecret'),
+      callbackURL: configService.get('github.callbackURL'),
       scope: ['public_profile'],
     });
   }

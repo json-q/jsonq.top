@@ -1,6 +1,6 @@
 // import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
@@ -15,13 +15,18 @@ import { AuthModule } from './modules/auth/auth.module';
 import { OssModule } from './modules/oss/oss.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import envConfig from './config/env';
 
 @Module({
   imports: [
     AuthModule,
     OssModule,
     // local config don't commit to git
-    ConfigModule.forRoot({ envFilePath: ['.env.local', '.env'], isGlobal: true }),
+    ConfigModule.forRoot({
+      // envFilePath: ['.env.local', '.env'],
+      load: [envConfig],
+      isGlobal: true,
+    }),
     ServeStaticModule.forRoot(
       {
         rootPath: join(__dirname, '..', 'client'),
@@ -39,12 +44,22 @@ import { AppService } from './app.service';
       },
       secret: '7accdc82bd754d6da1888c73b9801b9e',
     }),
-    ThrottlerModule.forRoot([
-      {
-        ttl: 1000,
-        limit: 1000,
-      },
-    ]),
+    // ThrottlerModule.forRoot([
+    //   {
+    //     ttl: 1000,
+    //     limit: 1000,
+    //   },
+    // ]),
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => [
+        {
+          ttl: configService.get('throttler.ttl'),
+          limit: configService.get('throttler.limit'),
+        },
+      ],
+    }),
     WinstonModule.forRootAsync({
       useFactory: () => ({
         level: 'debug',

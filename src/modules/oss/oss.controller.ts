@@ -29,11 +29,11 @@ export class OssController {
   private readonly client: OSS;
   constructor(private readonly configService: ConfigService) {
     this.client = new OSS({
-      endpoint: this.configService.get('Endpoint'),
-      region: this.configService.get('Region'),
-      accessKeyId: this.configService.get('AccessKeyID'),
-      accessKeySecret: this.configService.get('AccessKeySecret'),
-      bucket: this.configService.get('Bucket'),
+      endpoint: this.configService.get('oss.endpoint'),
+      region: this.configService.get('oss.region'),
+      accessKeyId: this.configService.get('oss.accessKeyId'),
+      accessKeySecret: this.configService.get('oss.accessKeySecret'),
+      bucket: this.configService.get('oss.bucket'),
       secure: true,
       cname: true,
     });
@@ -88,7 +88,6 @@ export class OssController {
     }
 
     try {
-      // 从提供的URL下载图片
       const response = await axios.get(imgUrl, { responseType: 'arraybuffer' });
 
       const ext = this.getImageFileExtension(imgUrl);

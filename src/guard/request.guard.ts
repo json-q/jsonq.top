@@ -32,9 +32,9 @@ export class RequestGuard implements CanActivate {
     const metadata = this.reflector.get(CONTROL_AUTH, context.getHandler());
     if (metadata == 'public') return true;
 
-    const authKey = this.configService.get('CookieAccessKey');
-    const configGithubId = this.configService.get('GithubID');
-    const token = request.cookies[authKey];
+    const accessKey = this.configService.get('cookie.accessKey');
+    const githubUserId = this.configService.get('github.userId');
+    const token = request.cookies[accessKey];
 
     if (!token) {
       throw new UnauthorizedException('Null Authorized');
@@ -43,7 +43,7 @@ export class RequestGuard implements CanActivate {
     try {
       // const token = authorization.split(' ')[1];
       const verifyToken = this.jwtService.verify(token);
-      if (verifyToken.id != configGithubId) {
+      if (verifyToken.id != githubUserId) {
         throw new ForbiddenException('Forbidden user');
       }
 
