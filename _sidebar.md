@@ -15,7 +15,7 @@
   - [路由 状态管理](post/vue/vue-router-vuex.md)
   - [Vue 高级特性及过渡动画](post/vue/vue-advance-animation.md)
 
-- [小程序]
+- 小程序
 
   - [小程序部分开发问题](/post/mini/mpwx-problem.md)
   - [腾讯地图微信小程序 SDK](/post/mini/mpwx-tencent-sdk.md)
