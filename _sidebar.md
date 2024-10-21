@@ -15,7 +15,14 @@
   - [路由 状态管理](post/vue/vue-router-vuex.md)
   - [Vue 高级特性及过渡动画](post/vue/vue-advance-animation.md)
 
+- [小程序]
+
+  - [小程序部分开发问题](/post/mini/mpwx-problem.md)
+  - [腾讯地图微信小程序 SDK](/post/mini/mpwx-tencent-sdk.md)
+  - [微信授权登录及信息填写](/post/mini/mpwx-login-info.md)
+
 - 部署
+
   - [Docker](post/deploy/docker.md)
   - [前后端分离宝塔部署](post/deploy/bt-deploy.md)
   - [Github Action CICD 自动部署](post/deploy/github-action-cicd.md)
