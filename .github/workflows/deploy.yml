@@ -53,6 +53,4 @@ jobs:
             echo "Failed to pull code after \$MAX_RETRIES attempts. Exiting."
             exit 1  # throw error
           fi
-
-          pm2 restart $APP_NAME || pm2 start "docsify s" --name $APP_NAME
           EOF

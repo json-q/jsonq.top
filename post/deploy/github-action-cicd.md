@@ -143,6 +143,14 @@ jobs:
 
 > 这种实现方式是通过拉取仓库代码，运行打包脚本，从而达到部署的，因此，安装时的大量 `node_modules` 也会占用大量的空间存储，如果介意此种方式，且项目的运行不需要依托 node，例如前端项目，就可以仅上传 dist 目录即可。
 
+简单运行和停止删除命令如下
+
+- `pm2 start dist/src/main.js --name nest-oss`
+- `pm2 stop nest-oss`
+- `pm2 delete nest-oss`
+
+![命令示例](https://static.jsonq.top/2024/10/21/091205140_image.png)
+
 # 提交代码
 
 此时提交代码就可以触发 GitHub Action 了。失败的话会有邮箱提示，详细信息可以查看 Action 控制台日志。
