@@ -3,10 +3,11 @@ const path = require("path");
 const glob = require("fast-glob");
 const axios = require("axios");
 
-const SCAN_PATH = "E:/blog-temp/jsonq.top/post/mini";
+const SCAN_PATH = "E:/xxx";
 const FETCH_URL = "http://localhost:8888/oss/url"; // nest server
 
 const imageRegex = /!\[.*?\]\((.*?)\)/g;
+// const imageRegex = /!\[.*?\]\(https:\/\/img2024\.cnblogs\.com\/(.*?)\)/g; // https://img2024.cnblogs.com
 // const imageRegex = /!\[.*?\]\(https:\/\/cdn\.jsdelivr\.net\/(.*?)\)/g;
 
 // 发送图片链接到服务器并获取新链接
@@ -34,7 +35,8 @@ async function processMdFile(filePath) {
   // 查找所有图片链接
   let match;
   while ((match = imageRegex.exec(fileContent)) !== null) {
-    // const oldImageUrl = `https://cdn.jsdelivr.net/${match[1]}`;
+    // const oldImgUrl = `https://cdn.jsdelivr.net/${match[1]}`;
+    // const oldImgUrl = `https://img2024.cnblogs.com/${match[1]}`;
     const oldImgUrl = match[1];
     const newImgUrl = await updateImageLink(oldImgUrl);
 
