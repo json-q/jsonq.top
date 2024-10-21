@@ -80,10 +80,7 @@ export class OssController {
   @ControlAuth('public')
   @UsePipes(new UrlPipe())
   async readFileUrlUpload(@Req() req: Request, @Query('imgUrl') imgUrl: string) {
-    const allowedIps: string[] = ['::1', '127.0.0.1'];
-    const allowed = allowedIps.some((ip) => req.ip.indexOf(ip) > -1);
-
-    if (!allowed) {
+    if (process.env.NODE_ENV === 'production') {
       throw new BadRequestException('production mode not allowed');
     }
 
