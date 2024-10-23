@@ -1,10 +1,3 @@
----
-title: TS 基础
-group:
-  title: TS
-order: 1
----
-
 # TS 认知
 
 安装 TypeScript 编译环境
@@ -29,7 +22,7 @@ tsc --version
 npm install ts-node -g
 ```
 
-- 另外ts-node需要依赖 `tslib` 和 `@types/node` 两个包：
+- 另外 ts-node 需要依赖 `tslib` 和 `@types/node` 两个包：
 
 ```bash
 npm install tslib @types/node -g
@@ -100,13 +93,13 @@ function foo(params: Params) {
   - 和 `any` 类型有点类似，但是 `unknown` 类型的值上做任何事情都是**不合法**的，而 `any` 类型上做任何操作都是合法的
 
 ```ts
-let a: unknown = '张三';
+let a: unknown = "张三";
 a = 123;
 
 // unknown 类型默认情况下做任意操作都是非法的
 // 要求必须进行类型的校验（缩小），才能根据缩小后的类型，进行对应类型的操作
-if (typeof a == 'string') {
-  console.log(a.length, a.split(''));
+if (typeof a == "string") {
+  console.log(a.length, a.split(""));
 }
 ```
 
@@ -130,7 +123,7 @@ function foo(str: string): void {
 // 实际开发中只有进行类型推导时，才会自动推导出 never 类型，很少使用
 // 死循环
 function foo(): never {
-  throw new Error('error');
+  throw new Error("error");
 }
 
 // 推导出的返回值
@@ -142,13 +135,13 @@ function foo() {
 // 定义开发工具类做严格校验时，可能会用到 never
 function handleMsg(msg: string | number | boolean) {
   switch (typeof msg) {
-    case 'string':
+    case "string":
       console.log(msg.length);
       break;
-    case 'number':
+    case "number":
       console.log(msg);
       break;
-    case 'boolean':
+    case "boolean":
       console.log(Number(msg));
       break;
     // 如果后续在参数中传入新的类型，却没有做 case 校验，never 就会提示错误
@@ -161,11 +154,11 @@ function handleMsg(msg: string | number | boolean) {
 - `tuple` 类型：`tuple` 是元组类型，很多语言中也有这种数据类型，比如 Python、Swift 等
 
 ```ts
-const info: any[] = ['张三', 18, '男'];
+const info: any[] = ["张三", 18, "男"];
 const name = info[0]; // 不能明确知道是何种数据类型
 
 // 元祖类型允许存放不同的数据类型
-const info: [string, number, string] = ['张三', 18, '男'];
+const info: [string, number, string] = ["张三", 18, "男"];
 const name = info[0]; // 可以推导出 name 为 string类型
 const age = info[1]; // 可以推导出 age 为 number类型
 
@@ -190,8 +183,8 @@ function useState<T>(state: T): [t, (newState: T) => void] {
 ```ts
 function foo(str: string | number) {
   // 可以根据类型缩小，确定更加准确的数据类型
-  if (typeof str === 'string') {
-    str.split(',');
+  if (typeof str === "string") {
+    str.split(",");
   } else {
     str *= str;
   }
@@ -206,12 +199,12 @@ function foo(str: string | number) {
 type Person = {
   name: string;
   age: number;
-  sex?: '男' | '女';
+  sex?: "男" | "女";
 };
 interface Person {
   name: string;
   age: number;
-  sex?: '男' | '女';
+  sex?: "男" | "女";
 }
 function foo(person: Person) {
   // ...
@@ -251,7 +244,7 @@ interface Person {
 
 ```ts
 // 交叉类型
-type Align = 'left' | 'right' | 'center';
+type Align = "left" | "right" | "center";
 type MyType = number & string; // 无意义的
 
 // 联合类型应用
@@ -267,13 +260,13 @@ type Loser = {
 
 // 同时满足 coder 和 loser 的类型
 const person: Coder & Loser = {
-  name: '张三',
-  job: '敲代码',
+  name: "张三",
+  job: "敲代码",
   code: function () {
-    console.log('code function');
+    console.log("code function");
   },
   introduce: function () {
-    console.log('I am a loser');
+    console.log("I am a loser");
   },
 };
 ```
@@ -287,9 +280,9 @@ const person: Coder & Loser = {
 
 ```ts
 // 根据class类型只能推断是 Element，如果明确知道具体类型，可以使用 as 进行类型缩小
-const imgEle = document.querySelector('.img') as HTMLImageElement;
-imgEle.src = 'xxx';
-imgEle.alt = 'xxx';
+const imgEle = document.querySelector(".img") as HTMLImageElement;
+imgEle.src = "xxx";
+imgEle.alt = "xxx";
 
 // 类型断言只能断言成更加具体哦类型，或者 不太具体（any/unknown）类型
 const age: number = 20;
@@ -299,11 +292,11 @@ const age: number = 20;
 // 对 TS 类型检测是正确的，但代码本身不太正确
 const age2 = age as any;
 const age3 = age2 as string;
-console.log(age3.split(''));
+console.log(age3.split(""));
 ```
 
 **非空类型断言（!）**  
-**强制性确定**某个标识符是有值的，跳过ts在编译阶段对它的检测；
+**强制性确定**某个标识符是有值的，跳过 ts 在编译阶段对它的检测；
 
 ```ts
 type Person = {
@@ -314,13 +307,13 @@ type Person = {
   };
 };
 const person: Person = {
-  name: '张三',
+  name: "张三",
 };
 
 // ts提示：赋值表达式的左侧不能是可选属性访问。
-person.friends?.name = '李四';
+person.friends?.name = "李四";
 // 可以使用类型缩小 if，也可以使用非空类型断言
-person.friends!.name = '李四';
+person.friends!.name = "李四";
 ```
 
 **字面量类型**
@@ -328,9 +321,9 @@ person.friends!.name = '李四';
 - 常用于将多个字面量类型联合起来，类似枚举
 
 ```ts
-type Direction = 'left' | 'right' | 'bottom' | 'left';
+type Direction = "left" | "right" | "bottom" | "left";
 // 该变量为类型中的其中一个
-const direction: Direction = 'right';
+const direction: Direction = "right";
 ```
 
 - 字面量推理
@@ -376,25 +369,25 @@ const req: {
 // typeof
 type ID = number | string;
 function getID(id: ID) {
-  if (typeof id === 'string') id.split(',');
+  if (typeof id === "string") id.split(",");
   else id.toFixed(2);
 }
 
 // 平等缩小
-type Align = 'left' | 'right' | 'center';
+type Align = "left" | "right" | "center";
 function getAlign(align: Align) {
   switch (align) {
-    case 'left':
-      console.log('调用left的逻辑');
+    case "left":
+      console.log("调用left的逻辑");
       break;
-    case 'right':
-      console.log('调用left的逻辑');
+    case "right":
+      console.log("调用left的逻辑");
       break;
-    case 'center':
-      console.log('调用left的逻辑');
+    case "center":
+      console.log("调用left的逻辑");
       break;
     default:
-      console.log('不确定的参数逻辑');
+      console.log("不确定的参数逻辑");
       break;
   }
 }
@@ -409,7 +402,7 @@ function formatDate(date: Date | string) {
 type Cat = { mouse: () => void };
 type Dog = { watchHome: () => void };
 function getAnimal(animal: Cat | Dog) {
-  if ('mouse' in animal) animal.mouse();
+  if ("mouse" in animal) animal.mouse();
   else animal.watchHome();
 }
 ```
@@ -455,9 +448,9 @@ interface Person {
 //   sex: '男',
 // };
 const p = {
-  name: '张三',
+  name: "张三",
   age: 18,
-  sex: '男',
+  sex: "男",
 };
 // 不报错
 const info: Person = p;
@@ -489,7 +482,7 @@ const foo: Foo = (num: number): number => {
   return num;
 };
 
-foo.name = '张三';
+foo.name = "张三";
 foo.age = 18;
 // 此表达式不可调用。
 // 类型 "Foo" 没有调用签名。
@@ -516,7 +509,7 @@ interface IPerson {
 }
 
 function factory(ctor: IPerson) {
-  return new ctor('张三');
+  return new ctor("张三");
 }
 ```
 
@@ -573,7 +566,7 @@ function sum(x: any, y: any): any {
 }
 
 sum(1, 2);
-sum('a', 'b');
+sum("a", "b");
 // 没有与此调用匹配的重载。
 // sum({ name: "a" }, null);
 ```
@@ -611,10 +604,10 @@ function getLength(arg: any) {
 ```ts
 // 1、对象中的函数中的 this
 const obj = {
-  name: '张三',
+  name: "张三",
   job: function () {
     // 默认情况下，在没有指定的情况下，this 为 any
-    console.log(this.name.length, 'coding');
+    console.log(this.name.length, "coding");
   },
 };
 
@@ -629,10 +622,10 @@ function foo() {
 }
 ```
 
-**ts的编译配置**
+**ts 的编译配置**
 
 - 在文件根目录下执行 `tsc --init`，生成 `tsconfig.json`
-- 在设置了 `noImplicitThis` 为 true 时， **TypeScript 会根据上下文推导this**，但是在不能正确推导时，就会报错，需要明确的指定 this。
+- 在设置了 `noImplicitThis` 为 true 时， **TypeScript 会根据上下文推导 this**，但是在不能正确推导时，就会报错，需要明确的指定 this。
 
 ```ts
 // 开启后，该函数的 this 报错
@@ -648,20 +641,20 @@ function foo(this: { name: string }, info: { name: string }) {
 }
 
 // foo 函数指定 this 指向
-foo.call({ name: '张三' }, { name: '李四' });
+foo.call({ name: "张三" }, { name: "李四" });
 ```
 
 > 手动指定 this 指向的方式并不推荐
 
-### this相关的内置工具
+### this 相关的内置工具
 
 Typescript 提供了一些工具类型来辅助进行常见的类型转换，这些类型全局可用。
 
 - `ThisParameterType`
-  - 用于提取一个函数类型 Typ e的this 参数类型
-  - 如果这个函数类型没有this参数返回 unknown
+  - 用于提取一个函数类型 Typ e 的 this 参数类型
+  - 如果这个函数类型没有 this 参数返回 unknown
 - `OmitThisParameter`
-  - 用于移除一个函数类型Type的this参数类型, 并且返回当前的函数类型
+  - 用于移除一个函数类型 Type 的 this 参数类型, 并且返回当前的函数类型
 
 ```ts
 function foo(this: { name: string }, info: { name: string }) {
@@ -696,7 +689,7 @@ interface IStore {
 
 const store: IStore & ThisType<IState> = {
   state: {
-    name: '张三',
+    name: "张三",
   },
   coding() {
     // 正常访问需要 .state.name

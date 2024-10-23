@@ -1,11 +1,3 @@
----
-title: 授权登录及用户信息完善
-order: 3
-group:
-  title: 小程序
-  order: 3
----
-
 ## 对接后台登录流程
 
 先上官方的经典登录流程图：
@@ -34,7 +26,7 @@ group:
 wx.login({
   success(res) {
     wx.request({
-      url: 'http://localhost:8888/testApi/wx/login',
+      url: "http://localhost:8888/testApi/wx/login",
       data: {
         // encryptedData 和 iv 是用来解析私密用户信息的，但是现在啥也获取不到了，所以没用
         code: res.code,
@@ -257,7 +249,7 @@ public R wxLogin(String code) {
 ```js
 Page({
   data: {
-    nameValue: '',
+    nameValue: "",
   },
 
   onLoad(options) {
@@ -287,7 +279,7 @@ Page({
 
 ```js
 const defaultAvatarUrl =
-  'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0';
+  "https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0";
 
 Page({
   data: {
@@ -295,7 +287,7 @@ Page({
   },
 
   async onChooseAvatar(e) {
-    const { avatarUrl = '' } = e.detail;
+    const { avatarUrl = "" } = e.detail;
     const { data, code } = await uploadImg(avatarUrl);
     code === 200 &&
       this.setData({

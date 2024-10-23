@@ -1,10 +1,3 @@
----
-title: TS 面向对象
-group:
-  title: TS
-order: 2
----
-
 # TS 面向对象
 
 ## 类的使用
@@ -24,11 +17,11 @@ class Person {
 
   coding() {
     // 方法中的 this 会根据上下文进行推导
-    console.log(this.name + 'coding');
+    console.log(this.name + "coding");
   }
 }
 
-const p = new Person('张三', 18);
+const p = new Person("张三", 18);
 console.log(p.name, p.age);
 ```
 
@@ -49,12 +42,12 @@ class Person {
 
   protected coding() {
     // private 修饰的只能在自己类内部访问，外界无法访问
-    console.log(this.name + 'coding', this.age);
+    console.log(this.name + "coding", this.age);
   }
 }
 
 // new实例化的既不属于类本身，也不属于子类，protected 修饰的成员变量无法访问
-const p = new Person('张三', 18);
+const p = new Person("张三", 18);
 // private: 属性“age”为私有属性，只能在类“Person”中访问。
 // protected: 属性“coding”受保护，只能在类“Person”及其子类中访问
 console.log(p.name, p.age, p.coding());
@@ -80,10 +73,10 @@ class Person {
   }
 }
 
-const p = new Person('张三', 18);
+const p = new Person("张三", 18);
 p.age = 20;
 // 无法为“name”赋值，因为它是只读属性
-p.name = '李四';
+p.name = "李四";
 ```
 
 **getters/setters**
@@ -107,7 +100,7 @@ class Person {
 
   // set 可以对参数进行拦截，处理业务
   set age(newV: number) {
-    if (newV < 0) console.log('age 不能小于0');
+    if (newV < 0) console.log("age 不能小于0");
     this._age = newV;
   }
 
@@ -116,7 +109,7 @@ class Person {
   }
 }
 
-const p = new Person('张三', 20);
+const p = new Person("张三", 20);
 // 没有提供 name 的 set，是无法设置上值的
 console.log(p.name, p.age); // undefined 20
 ```
@@ -141,19 +134,16 @@ class Person {
 // TS 提供的语法糖可以直接在 constructor 中声明并传入参数赋值
 // 参数前方必须使用显式修饰符
 class Person {
-  constructor(
-    public name: string,
-    private _age: number,
-  ) {}
+  constructor(public name: string, private _age: number) {}
   // ...
 }
 ```
 
 > 在构造函数参数前**必须添加一个可见性修饰符 `public` `private` `protected` 或者 `readonly` 来创建参数属性**，最后这些类属性字段也会得到这些修饰符
 
-## 抽象类abstract
+## 抽象类 abstract
 
-- 抽象类是**不能被实例化**的（也就是不能通过new创建）
+- 抽象类是**不能被实例化**的（也就是不能通过 new 创建）
 - 抽象类可以包含抽象方法，也可以包含有实现体的方法
 - 有抽象方法的类，必须是一个抽象类
 - 抽象方法**必须被子类实现**，否则该类必须是一个抽象类
@@ -162,10 +152,7 @@ _例子_：实现一个通用函数，来计算 矩形、圆形、三角形的�
 
 ```ts
 class Rectangle {
-  constructor(
-    public width: number,
-    public height: number,
-  ) {}
+  constructor(public width: number, public height: number) {}
 
   getArea() {
     return this.width * this.height;
@@ -191,7 +178,7 @@ calcArea(new Rectangle(1, 2));
 
 > **弊端**：每声明一个新的计算面积的类，就需要在公共函数的参数中新增该类的类型，当类型特别多的情况下，会造成重复操作过多
 
-_使用 abstract改造_
+_使用 abstract 改造_
 
 ```ts
 abstract class Shape {
@@ -200,10 +187,7 @@ abstract class Shape {
   abstract getArea();
 }
 class Rectangle extends Shape {
-  constructor(
-    public width: number,
-    public height: number,
-  ) {
+  constructor(public width: number, public height: number) {
     super();
   }
 
@@ -240,30 +224,24 @@ calcArea(new Rectangle(1, 2));
 
 ```ts
 class Person {
-  constructor(
-    public name: string,
-    public age: number,
-  ) {}
+  constructor(public name: string, public age: number) {}
 }
 
 class Cat {
-  constructor(
-    public name: string,
-    public age: number,
-  ) {}
+  constructor(public name: string, public age: number) {}
 }
 
 function getPerson(p: Person) {
   console.log(p.name, p.age);
 }
 
-getPerson(new Person('张三', 18));
-getPerson({ name: '李四', age: 20 });
+getPerson(new Person("张三", 18));
+getPerson({ name: "李四", age: 20 });
 // 接收 Person 类型，传入 Cat 类型不报错
-getPerson(new Cat('狸花', 2));
+getPerson(new Cat("狸花", 2));
 
 // Cat 类型赋给了 Person 类型
-const person: Person = new Cat('折耳', 1);
+const person: Person = new Cat("折耳", 1);
 ```
 
 ### 类的类型
@@ -323,7 +301,7 @@ interface Coder extends Person {
 }
 
 const coder: Coder = {
-  name: '码农',
+  name: "码农",
   coding() {},
   age: 18,
 };
@@ -361,7 +339,7 @@ console.log(a.name, a.watchHome());
 
 **严格的字面量赋值检测**
 
-对于对象的字面量赋值，在TypeScript中有一个非常有意思的现象
+对于对象的字面量赋值，在 TypeScript 中有一个非常有意思的现象
 
 ![严格的字面量赋值检测](https://static.jsonq.top/2024/10/21/114621968_2be06860-bff4-4773-bc28-b4806cdea077.jpeg)
 
@@ -399,8 +377,8 @@ enum Direction {
   // 如果某一个枚举是字符串类型，那么从该枚举之后的所有类型，都需要初始化，除非再次初始化值为 number 类型
   LEFT,
   RIGHT,
-  TOP = 'TOP',
-  BOTTOM = 'BOTTOM',
+  TOP = "TOP",
+  BOTTOM = "BOTTOM",
   LEFT_TOP = 10,
   LEFT_BOTTOM,
 }
@@ -432,7 +410,7 @@ function getInfo(): InfoType {
 }
 
 const info = getInfo();
-console.log(info.name, info['age']);
+console.log(info.name, info["age"]);
 
 // 案例
 interface CollectType {
@@ -448,7 +426,7 @@ function getCollect(col: CollectType) {
   }
 }
 
-const tuple: [string, string] = ['张三', '李四'];
+const tuple: [string, string] = ["张三", "李四"];
 ```
 
 > 官方文档：索引签名的属性类型只能是 `string` | `number` 中的**其中一个类型**
@@ -472,7 +450,7 @@ interface IndexType {
 
 // 索引签名：[index: string]: string;  报错
 // 严格字面量赋值检测：[...] ==> Array 实例 ==> names[0]、names.forEach
-const names: IndexType = ['张三', '李四', '王五'];
+const names: IndexType = ["张三", "李四", "王五"];
 
 // names.forEach 返回的是一个 function ，不符合返回值 string
 names.forEach;
@@ -497,7 +475,7 @@ interface IndexType {
   isMale: boolean;
 }
 
-const names: IndexType = ['张三', '李四', '王五'];
+const names: IndexType = ["张三", "李四", "王五"];
 ```
 
 > - 当有两个签名时，数字类型的值类型必须是比字符串类型的值类型更加确定的类型（需要是字符串类型的子类型）

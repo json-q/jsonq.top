@@ -1,15 +1,8 @@
----
-title: TS 语法扩展
-group:
-  title: TS
-order: 4
----
-
 # TS 模块化
 
 ## TS 模块化使用
 
-TypeScript 中最主要使用的模块化方案就是ES Module，即 `import/export`
+TypeScript 中最主要使用的模块化方案就是 ES Module，即 `import/export`
 
 **非模块**
 
@@ -22,7 +15,7 @@ TypeScript 中最主要使用的模块化方案就是ES Module，即 `import/exp
 使用 `type` 前缀 ，表明被导入的是一个类型：
 
 ```ts
-import type { PersonType } from './types';
+import type { PersonType } from "./types";
 
 const p: PersonType = {};
 ```
@@ -39,24 +32,24 @@ namespace API {
   }
 }
 
-const data: API.TableData = fetch('...');
+const data: API.TableData = fetch("...");
 ```
 
 ## 内置类型声明
 
 **类型的查找**
 
-typescript文件：`.d.ts`文件
+typescript 文件：`.d.ts`文件
 
 - 正常编写的 `.ts` 文件，最终都会被编译成 js 文件
 - `.d.ts` 文件，它是用来做类型的声明(declare)，称之为类型声明或者类型定义文件。**它仅仅用来做类型检测，告知 typescript 有哪些类型的声明**
 
 **内置类型声明**
 
-内置类型声明是 typescript 自带的、内置了 JavaScript 运行时的一些标准化API的声明文件
+内置类型声明是 typescript 自带的、内置了 JavaScript 运行时的一些标准化 API 的声明文件
 
 - 包括比如`Function`、`String`、`Math`、`Date`等内置类型；
-- 也包括运行环境中的DOM API，比如`Window`、`Document`等；
+- 也包括运行环境中的 DOM API，比如`Window`、`Document`等；
 - TypeScript 使用模式命名这些声明文件 `lib.[something].d.ts`
 
 内置类型声明通常在安装 typescript 的环境中会带有的：https://github.com/microsoft/TypeScript/tree/main/lib
@@ -135,9 +128,9 @@ moudle.exports = {
 
 - 外部类型声明通常是我们使用一些库（比如第三方库）时，需要的一些类型声明。
 - 这些库通常有两种类型声明方式：
-- 方式一：在自己库中进行类型声明（编写.d.ts文件），比如axios
+- 方式一：在自己库中进行类型声明（编写.d.ts 文件），比如 axios
 - 方式二：通过社区的一个公有库 DefinitelyTyped 存放类型声明文件
-  - 该库的GitHub地址：https://github.com/DefinitelyTyped/DefinitelyTyped/
+  - 该库的 GitHub 地址：https://github.com/DefinitelyTyped/DefinitelyTyped/
   - 该库查找声明安装方式的地址：https://www.typescriptlang.org/dt/search
   - 比如安装 react 的类型声明： `npm i @types/react --save-dev`
 
@@ -147,7 +140,7 @@ moudle.exports = {
 
 ```ts
 // .ts
-import Nprogress from 'nprogress';
+import Nprogress from "nprogress";
 
 // .d.ts
 declare module nprogress {
@@ -160,7 +153,7 @@ declare module nprogress {
 **declare 声明模块**
 
 ```ts
-declare module 'npreogress' {
+declare module "npreogress" {
   export function test() {
     // ...
   }
@@ -176,9 +169,9 @@ declare const name: string;
 - 比如在开发中使用了 `jpg` 这类图片文件，默认 typescript 也是不支持的，也需要对其进行声明
 
 ```ts
-declare module '*.vue';
+declare module "*.vue";
 
-declare module '.jpg';
+declare module ".jpg";
 
 // 如果 webpack 报错没有合适的 loader 对图片进行处理
 // webpack.config.js
@@ -187,7 +180,7 @@ module: {
     // ...
     {
       test: /\(png|jpe?g|svg|gif)$/,
-      type: 'asset/resource',
+      type: "asset/resource",
     },
   ];
 }
@@ -195,8 +188,8 @@ module: {
 
 **declare 命名空间**
 
-- 比如在 index.html 中直接引入了jQuery：
-  - CDN地址： https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js
+- 比如在 index.html 中直接引入了 jQuery：
+  - CDN 地址： https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js
 
 ```ts
 declare namespace ${

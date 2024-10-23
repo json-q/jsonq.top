@@ -1,11 +1,3 @@
----
-title: 常见问题汇总
-order: 1
-group:
-  title: 小程序
-  order: 3
----
-
 ## TS 项目构建 npm 出错
 
 使用微信开发者工具构建 npm 时出现 `NPM packages not found. Please confirm npm packages which need to build are belong to miniprogramRoot directory…` 的错误
@@ -27,11 +19,11 @@ group:
 }
 ```
 
-然后重启项目，不重启项目可能依旧报错，重启之后点击 [ 构建npm ] 即可。
+然后重启项目，不重启项目可能依旧报错，重启之后点击 [ 构建 npm ] 即可。
 
 ## 引用 lodash 报错
 
-lodash有相当一部分方法都是在浏览器环境下运行的，小程序的运行环境和浏览器不一样。  
+lodash 有相当一部分方法都是在浏览器环境下运行的，小程序的运行环境和浏览器不一样。  
 解决方法：新建一个 `lodash-fix.js` 将以下内容复制进去，在引用 lodash 的地方之前引入该文件即可。
 
 ```js

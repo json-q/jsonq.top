@@ -1,10 +1,3 @@
----
-title: TS 泛型及类型体操
-group:
-  title: TS
-order: 3
----
-
 # TS 泛型认知
 
 - 封装一个函数，传入一个参数，并且返回这个参数
@@ -21,7 +14,7 @@ function foo<Type>(arg: Type): Type {
 }
 
 // const s: string
-const s = foo<string>('abc');
+const s = foo<string>("abc");
 
 // const n: number[]
 const n = foo<number[]>([1, 2, 3]);
@@ -58,10 +51,10 @@ interface HobbyType {
 }
 
 const p: Person<HobbyType, string> = {
-  name: '张三',
+  name: "张三",
   age: 20,
-  sex: '男',
-  hobby: { song: '唱', jump: '跳' },
+  sex: "男",
+  hobby: { song: "唱", jump: "跳" },
 };
 ```
 
@@ -69,21 +62,18 @@ const p: Person<HobbyType, string> = {
 
 ```ts
 class Person<S = string, N = number> {
-  constructor(
-    public name: S,
-    public age: N,
-  ) {}
+  constructor(public name: S, public age: N) {}
 }
 
 // const p = new Person("张三",18)
 
-const p = new Person<number, string>(10, '张三');
+const p = new Person<number, string>(10, "张三");
 ```
 
-> - `T`：Type的缩写，类型
-> - `K、V`：key和value的缩写，键值对
-> - `E`：Element的缩写，元素
-> - `O`：Object的缩写，对象
+> - `T`：Type 的缩写，类型
+> - `K、V`：key 和 value 的缩写，键值对
+> - `E`：Element 的缩写，元素
+> - `O`：Object 的缩写，对象
 
 ## 泛型约束
 
@@ -106,7 +96,7 @@ function getInfo<T extends Length>(args: T): T {
   return args;
 }
 
-getInfo('aaa');
+getInfo("aaa");
 getInfo([1, 2]);
 // 类型 "{}" 中缺少属性 "length"，但类型 "Length" 中需要该属性。
 // getInfo({});
@@ -132,11 +122,11 @@ function getObjProperty<O, K extends keyof O>(obj: O, key: K) {
 }
 
 const info = {
-  name: '张三',
+  name: "张三",
   age: 18,
-  sex: '男',
+  sex: "男",
 };
-getObjProperty(info, 'name');
+getObjProperty(info, "name");
 ```
 
 ![keyof 使用](https://static.jsonq.top/2024/10/21/114622990_d9d4349f-e240-4919-baf8-17633a09fad2.jpeg)
@@ -213,10 +203,7 @@ function sum(a: any, b: any) {
  * a: T, b: T ：限制传入的两个参数类型一样
  * (...): T extends number ? number : string：如果不做条件类型判断 ，返回的参数是字面量而非类型
  */
-function sum<T extends string | number>(
-  a: T,
-  b: T,
-): T extends number ? number : string;
+function sum<T extends string | number>(a: T, b: T): T extends number ? number : string;
 function sum(a: any, b: any) {
   return a + b;
 }
@@ -232,7 +219,7 @@ const res = sum(20, 30);
 ```ts
 type Fn1Type = (a: number, b: number) => number;
 function foo() {
-  return 'abc';
+  return "abc";
 }
 
 // type Fn1ReturnType = number
@@ -249,22 +236,16 @@ type fooReturnType = ReturnType<typeof foo>;
 ```ts
 type Fn1Type = (a: number, b: number) => number;
 function foo() {
-  return 'abc';
+  return "abc";
 }
 
 // 使用 infer 推断返回类型并将其返回
-type MyReturnType<T extends (...args: any) => any> = T extends (
-  ...args: any
-) => infer R
+type MyReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R
   ? R
   : never;
 
 // 使用 infer 推断参数并返回参数类型
-type MyParamType<T extends (...args: any) => any> = T extends (
-  ...args: infer P
-) => any
-  ? P
-  : never;
+type MyParamType<T extends (...args: any) => any> = T extends (...args: infer P) => any ? P : never;
 
 type Fn1ReturnType = MyReturnType<Fn1Type>; // type Fn1ReturnType = number
 type Fn1ParamType = MyParamType<Fn1Type>; // type Fn1ParamType = [a: number, b: number]
@@ -335,7 +316,7 @@ type ReadonlyPerson = Readonly<Person>;
 
 ### Record
 
-`Record<Keys,T>` 用于构造一个对象类型，它所有的key(键)都是 Keys 类型，它所有的value(值)都是 T 类型。  
+`Record<Keys,T>` 用于构造一个对象类型，它所有的 key(键)都是 Keys 类型，它所有的 value(值)都是 T 类型。  
 具体功能如图所示：
 
 ![Record 基本用法](https://static.jsonq.top/2024/10/21/114624034_e9867a3d-5ffe-44a9-a28f-d37d69647d38.png)
@@ -347,7 +328,7 @@ type Person = {
   sex?: string;
 };
 
-type CityKeys = '北京' | '上海' | '广州' | '深圳';
+type CityKeys = "北京" | "上海" | "广州" | "深圳";
 
 // keyof 的使用
 type Keys = keyof Person; // "name" | "age" | "sex"
@@ -379,7 +360,7 @@ type MyPick<T, Keys extends keyof T> = {
   [K in Keys]: T[K]; // 将这些 Keys 逐一赋上对应的类型
 };
 
-type PickPerson = Pick<Person, 'name' | 'age'>;
+type PickPerson = Pick<Person, "name" | "age">;
 ```
 
 ### Omit
@@ -399,7 +380,7 @@ type MyOmit<T, Keys extends keyof T> = {
   [K in Keys as K extends Keys ? never : K]: T[K];
 };
 
-type OmitPerson = Omit<Person, 'name'>;
+type OmitPerson = Omit<Person, "name">;
 ```
 
 ### Exclude
@@ -407,14 +388,14 @@ type OmitPerson = Omit<Person, 'name'>;
 `Exclude<T, U>` 从**联合类型**中排除掉 U 属性，此处的 U 不一定是 T 中的某个类型
 
 ```ts
-type CityType = '北京' | '上海' | '广州' | '深圳';
+type CityType = "北京" | "上海" | "广州" | "深圳";
 
 type MyExclude<T, U> = T extends U ? never : U;
 
 // type ExcludePerson = "广州" | "深圳"
-type ExcludePerson = Exclude<CityType, '北京' | '上海'>;
+type ExcludePerson = Exclude<CityType, "北京" | "上海">;
 // type ExcludePerson = '北京' | '上海' | '广州' | '深圳';
-type ExcludePerson = Exclude<CityType, 'aaaa'>;
+type ExcludePerson = Exclude<CityType, "aaaa">;
 ```
 
 此时可以使用 `Exclude` 尝试改造 `Omit`
@@ -436,7 +417,7 @@ type MyExclude<T, U> = T extends U ? U : never;
 `NonNullable<T>`从**联合类型** T 中排除了所有的 null、undefined 的类型
 
 ```ts
-type CityType = '北京' | '上海' | '广州' | '深圳' | undefined | null;
+type CityType = "北京" | "上海" | "广州" | "深圳" | undefined | null;
 
 type MyNonNullable<T> = T extends null | undefined ? never : T;
 
@@ -465,7 +446,5 @@ type InfoReturnType = ReturnType<typeof info>; // string
  * 第一个 extends (...args) => 是为了限制传入的 T 类型
  * 第二个 extends (...args) => 是做判断 ，使用 infer 推断类型并返回
  */
-type MyReturnType<T extends (...args) => any> = T extends (...args) => infer R
-  ? R
-  : never;
+type MyReturnType<T extends (...args) => any> = T extends (...args) => infer R ? R : never;
 ```
