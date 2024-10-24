@@ -39,7 +39,8 @@ module.exports = {
   env: { node: true },
 };
 
-// Eslint 9 示例，默认只识别 browser 语法，node 模块需要添加
+// Eslint 9 示例，初始化的项目只添加了 browser 模块语法，node 模块需要添加
+// globals 存在很多模块，可自行查看
 export default [
   {
     languageOptions: {
